@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Magfinalproject.Models.information>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {<div class="btn-group btn-group-df">
+        <button value="@Html.DisplayFor(modelItem => item.maintitle)" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span class="caret"></span>
+        </button>
+        @foreach (var subitem in item.subinformation)
+        { <ul class="dropdown-menu">
+        <li>
+            @Html.ActionLink(subitem.subtitle, "Details", "cardinfoes", new { id = subitem.ID }, new { @class = "text-info" })
+        </li>
+    </ul>}
+    </div>      }
+}
+

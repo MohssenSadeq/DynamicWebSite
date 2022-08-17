@@ -1,0 +1,186 @@
+﻿@model IEnumerable<Magfinalproject.Models.Request_to_edit>
+
+@{
+    ViewBag.Title = "الطلبات / الرئيسية";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+
+<style>
+    .col-sm-6 {
+        float: left;
+    }
+</style>
+
+<div id="page-wrapper" class="mohsen">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table style="width:100%;direction:rtl" class="table table-secondary table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                               
+                                <th>
+                                    @Html.DisplayNameFor(model => model.userid)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.staff.name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dgreeid)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.fullName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.phoneNum)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.date)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.pic)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.picuni)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.states)
+                                </th>
+                                <th></th>
+                            </tr>
+                                       <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    @if (item.userid != null)
+                                    {
+                                        <td>
+                                            @Html.ActionLink(Html.DisplayFor(modelItem => item.user.nikname).ToString(), "Details", "ApplicationUsers", new { id = item.userid }, new { @class = " text-info" })
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.user.nikname)
+
+                                        </td>
+                                    }
+                                    <td>
+                                        @Html.ActionLink(item.staff.name, "Details", "staffs", new { id = item.staff.id }, htmlAttributes: new { @class = "text-info" })
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dgreeid)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fullName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.phoneNum)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.date)
+                                    </td>
+                                    <td>
+                                        <img src="~/uploads/@item.pic" class="thumbnail" style="width:48px; height:48px" />
+                                    </td>
+                                    <td>
+                                        <img src="~/uploads/@item.picuni" class="thumbnail" style="width:48px; height:48px" />
+                                    </td>
+                                    <td>
+                                        @if (item.states == true)
+                                        {
+                                            @Html.Label("مقبول")
+                                        }
+                                        else
+                                        {
+                                            @Html.Label("قيد المراجعة")
+
+                                        }
+                                    </td>
+                                    <td>
+
+                                        <a href="~/Request_to_edit/Edit/@item.ID" title="تعديل" class=" btn btn-default btn-sm text-dark"><i class="fa fa-pencil fa-lg"></i></a> |
+                                        <a href="~/Request_to_edit/Details/@item.ID" title="تفاصيل" class="btn btn-default btn-sm text-info"><i class="fa fa-info-circle fa-lg"></i></a> |
+                                        <a href="~/Request_to_edit/Delete/@item.ID" title="حذف" class="btn btn-default btn-sm text-danger"><i class="fa fa-remove fa-lg"></i></a>
+
+                                    </td>
+                                </tr>
+                            }
+
+                            </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+</div>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/vendor/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Success"))
+     {
+       @:toastr.success("تمت الإظافة بنجاح.");
+
+            }
+        });
+
+        $(document).ready(function () {
+            @if (TempData.ContainsKey("Delete"))
+
+           {
+                @:toastr.info("تم الحذف بنجاح.");
+
+            }
+        });
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Edit"))
+          {
+              @:toastr.info("تم التعديل بنجاح.");
+
+          }
+        });
+        $(document).ready(function () {
+          @if(TempData.ContainsKey("Edit"))
+          {
+              @:toastr.success("تم إرسال الرسالة بنجاح.");
+
+          }
+        });
+    </script>
+
+}

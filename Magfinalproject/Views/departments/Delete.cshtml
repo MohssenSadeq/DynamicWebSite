@@ -1,0 +1,75 @@
+﻿
+
+@model Magfinalproject.Models.department
+
+@{
+    ViewBag.Title = "نقاط الخدمة / الحذف";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:60px;padding-top:25px">الحذف</h2>
+<h3 style="padding-right:60px;padding-top:25px">هل أنت متأكد للقيام بعملية الحذف ؟</h3>
+<div>
+
+    <hr />
+    <dl class="form-horizontal " style="padding-right:5em;padding-top:1em">
+        <dt>
+            @Html.DisplayNameFor(model => model.college.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.college.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dgreeid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dgreeid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+          الصورة
+
+
+        </dt>
+        <dd>
+            <img src="~/uploads/@Model.photo" class="thumbnail" style="width:48px; height:48px" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.about)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.about).ToString()))
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-right:40px">
+            <input type="submit" value="حذف" class="btn btn-primary" /> |
+            @Html.ActionLink("الرجوع الى القائمة", "Index")
+        </div>
+    }
+</div>
+

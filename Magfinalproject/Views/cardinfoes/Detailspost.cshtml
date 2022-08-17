@@ -1,0 +1,166 @@
+﻿@model Magfinalproject.Models.cardinfo
+<link href="~/AdenCss/style.css" rel="stylesheet" />
+@using Magfinalproject.Models;
+@{
+    ViewBag.Title = Model.Category.classname+"/ التفاصيل";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+    var it = db.cardinfoes;
+    var item = db.Categories;
+}
+<div class="row panel-body pad   " style="margin-top:15PX">
+
+    <div class=" row page-header-row">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="~/Home/Index">الرئيسية</a>
+            </li>
+            <li class="breadcrumb-item active">@ViewBag.Title</li>
+        </ol>
+
+
+        <header id="header" style="direction:rtl">
+
+
+            <!-- Page Header -->
+            <div id="post-header" class="header-a">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10" style="padding-right:35px;margin-top:25px">
+
+                            <h1>@Html.DisplayFor(model => model.title)</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+        </header>
+        <div class="section ">
+            <!-- container -->
+            <div class="container-fluid">
+                <!-- row -->
+                <div class="row" style="margin-right:13px">
+                    <!-- Post content -->
+                    <div class="col-sm-8">
+                        <div class="thumbnail " style="border: ridge">
+                            <img class="thumbnail" src="~/uploads/@Model.pic" alt="" style=" align-content:center">
+                                        <figcaption><!--نعمل العنوان--></figcaption>
+                                   
+                         
+                            <!-- AddToAny BEGIN -->
+                            <div style="display:inline-flex;padding:6%;padding-bottom:0%" class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                <a class="a2a_button_whatsapp"></a>
+                                <a class="a2a_button_facebook"></a>
+                                <a class="a2a_button_facebook_messenger"></a>
+                                <a class="a2a_button_telegram"></a>
+                                <a class="a2a_button_twitter"></a>
+                                <a class="a2a_button_pinterest"></a>
+                                <a class="a2a_button_email"></a>
+                                <a class="a2a_button_copy_link"></a>
+                                <a class="a2a_button_printfriendly"></a>
+                            </div>
+                            <script>
+                                var a2a_config = a2a_config || {};
+                                a2a_config.locale = "ar";
+                            </script>
+                            <script async src="https://static.addtoany.com/menu/page.js"></script>
+                          
+                            <!-- author -->
+                            <div class="section-row">
+                                <div class="post-author">
+                                    <div class="media">
+
+                                        <div class="media-middle" style="padding:25px">
+                                            <div class="media-heading">
+                                                <h2><span class="fa fa-info-circle"></span>  حول</h2>
+                                            </div>
+                                            <p>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.describtion).ToString()))</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+
+                        <div class="thumbnail " style="border: ridge">
+                            <div class="aside-widget " style="margin:5%">
+                                <div class="section-title">
+                                    <h3 class="text-info"><span class="fa fa-newspaper-o">  </span>   @Html.DisplayFor(model => model.Category.classname) أخرى</h3><hr />
+                                </div>
+                                <div class="row">
+
+                                    @foreach (var subitem in it.Where(m => m.CategoryID.Equals(Model.CategoryID)).OrderBy(r => r.date).Take(6))
+                                    {
+
+
+                                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 thumbnail " style="max-width:128px;max-height:130px;text-align:center">
+
+                                            <img class="img-circle " src="~/uploads/@subitem.pic" alt="" style=" width:70px; height:70px">
+
+                                            @{if (subitem.title.Length <= 15)
+                                                {
+                                                    <h4>@Html.ActionLink(Html.DisplayFor(model => subitem.title).ToString(), "Detailspost", "cardinfoes", new { id = subitem.ID }, new { @class = " text-info" })  </h4>
+
+                                                }
+                                                else
+                                                {
+                                                    <h4>@Html.ActionLink(Html.DisplayFor(model => subitem.title).ToString().Substring(0, 15) + "...", "Detailspost", "cardinfoes", new { id = subitem.ID }, new { @class = " text-info" })  </h4>
+
+                                                }
+                                            }                                        
+                                        </div>
+
+
+                                                }
+
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <h3>@Html.ActionLink(" عرض الكل", "allnews", "Categories", new { id = Model.CategoryID }, new { @class = "category-heading" })</h3>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="thumbnail " style="border: ridge">
+                            <div class="aside-widget" style="margin:5%">
+                                <div class="section-title">
+                                    <h3 class="text-info"><span class="fa fa-university">  </span>  تصنيفات أخرى</h3><hr style="margin-bottom:-30px" />
+                                </div>
+
+
+                                <div class="tags-widget">
+                                    <ul>
+                                        @foreach (var subitem in item.Where(m => m.classname != Model.Category.classname))
+                                        {
+                                            <li style="margin-top:25px">@Html.ActionLink(@Html.DisplayFor(modelItem => subitem.classname).ToString(), "allnews", "categories", new { id = subitem.ID }, new { @class = "category-heading" })</li>
+
+
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /aside -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+
+    </div>
+      </div>
+<style>
+    img {
+        display: block;
+        width: auto;
+        height: auto;
+    }
+</style>

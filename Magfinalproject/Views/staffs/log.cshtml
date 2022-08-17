@@ -1,0 +1,98 @@
+﻿@model Magfinalproject.Models.staff
+
+@{
+    ViewBag.Title = "تسجيل الدخول";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var u = Model.user_name;
+    var p = Model.password;
+}
+
+
+
+<h2 class="mohsen">تسجيل الدخول</h2>
+
+
+       <style type="text/css">
+           .mar_35{
+           padding-right:35px;
+           width:100%;
+           }
+       </style>
+
+    <div class="form-horizontal">
+    
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.user_name)
+        @Html.HiddenFor(model => model.password)
+        <div class="form-group mar_35" >
+            @Html.LabelFor(model => model.user_name, htmlAttributes: new { @class = "control-label col-md-2 " })
+            <div class="col-md-10">
+                <input name="userr" type="text" value="" class="form-control "id="userid" />
+                <div class="alert alert-danger" id="error-div" style="display:none">
+                    <span id="view-error"></span>
+                </div>
+               
+            </div>
+        </div>
+
+        <div class="form-group mar_35">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2 " })
+            <div class="col-md-10">  
+                <input name="pass" type="password" value="" class="form-control " id="pass" />
+                <div class="alert alert-danger" id="error-div" style="display:none">
+                    <span id="view-error"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group mar_35">
+            <div class="col-md-offset-2 col-md-6">
+                <a href="~/staffs/Edit_client/@Model.id" class="btn btn-primary" id="log"> تسجيل الدخول  </a>
+                @Html.ActionLink("طلب حساب", "Create", "Request_to_edit", new { id = Model.id },htmlAttributes: new { @class = "btn btn-primary" ,@style="size:10%"} )
+                <hr />
+                @Html.ActionLink("الرجوع إلى صفحة الموظف", "Details_for_client", new { id = Model.id }, new { @class = "text-info" })
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+<script src="~/Scripts/jquery.min.js"></script>
+
+<script>
+    $(function () {
+
+        $("#log").click(function () {
+            if ($("#userid").val().toString() == "") {
+         
+                $("#error-div").fadeIn();
+                var m = "الرجآء أدخال أسم المستخدم";
+                 $("#view-error").replaceWith(m);
+               
+                return false;
+            }
+            if ($("#pass").val().toString() == "") {
+                $("#error-div").fadeIn();
+                $("#view-error").replaceWith("الرجآء أدخال كلمة المرور");
+                return false;
+            }
+            @*var user = @Model.userid;
+                var pass = @Model.password;*@
+
+            if ($("#userid").val() != "@u" || $("#pass").val() != "@p") {
+                
+                $("#error-div").fadeIn();
+                $("#view-error").replaceWith(" أسم المستخدم أو كلمة المرور غير صحيحة");
+                return false;
+            }
+    
+        })
+    });
+</script>

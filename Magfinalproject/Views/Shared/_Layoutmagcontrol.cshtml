@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+
+<html >
+<head>
+@using Microsoft.AspNet.Identity
+@using Magfinalproject.Models;
+
+    @{
+        ViewBag.Title = "لوحة التحكم";
+        ApplicationDbContext db = new ApplicationDbContext();
+
+
+        var asky = db.asks.Where(a=>a.answer==null).OrderByDescending(a=>a.date);
+        var ask = db.asks.Where(a => a.answer==null).Count();
+        var request = db.Request_to_edit.Where(a => a.states == false).Count();
+        var requesty = db.Request_to_edit.Where(a => a.states == false).OrderByDescending(a => a.date);
+
+
+    }
+<link href="~/vendor/sb-admin-2.css" rel="stylesheet" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scaleable=no">
+<link href="~/vendor1/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.form-inline{
+display:block;
+}
+.nav-link,a,div,.sidenav-toggler,li, button {
+transition: all .40s ease-out;
+
+}
+a, button {
+
+line-height: 1.3;
+}
+.d-lg-none{
+    display:unset;
+}
+.dropdown-menu{
+    text-align: right;
+ 
+}
+
+
+</style>
+    @Styles.Render("~/bundles/toastr")
+<link href="~/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet" />
+<link href="~/vendor/jquery.dataTables.min.css" rel="stylesheet" />
+<!-- Custom fonts for this template-->
+<!-- Custom styles for this template-->
+<link href="~/AdenCss/sb-admin.min.css" rel="stylesheet" />
+<link href="~/Content/Control_Panel.css" rel="stylesheet" />
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<link href="~/vendor1/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="~/AdenCss/bootstrap.rtl.css" rel="stylesheet" />
+@{
+ViewBag.Title = "magcontrol";
+}
+           
+</head>
+<body class="fixed-nav sticky-footer" id="page-top"style="background-color:black;">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav"style="background-color:#e29d00">
+    <h3>
+        <a class="navbar-brand" href="~/Home/index">  <i class="fa fa-home fa-lg "> </i>  شـركة الصـلاحـي للصرافة والتحويلات  </a>
+
+    </h3>
+
+  
+    <ul class="navbar-nav ml-auto" style="margin-right:40%;position:absolute;direction: rtl;top:-15px">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-fw fa-envelope"></i>
+                <span class="d-lg-none">
+                    الرسائل
+                    <span class="badge badge-pill badge-primary">@ask.ToString() جديد</span>
+                </span>
+                <span class="indicator text-primary d-none d-lg-block">
+                    <i class="fa fa-fw fa-circle"></i>
+                </span>
+            </a>
+            <div class="dropdown-menu container-fluid" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">الرسائل الجديدة:</h6>
+                 @foreach (var item in asky)
+                 {
+                    <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="~/asks/Edit/@item.id">
+                            @if (item.subject.ToString().Length >= 25)
+                            {
+                                <div class="dropdown-message small">@item.subject.Substring(0, 25) ...</div>
+
+                            }
+                            else
+                            {
+                                <div class="">@item.subject</div>
+
+                            }                           
+                            
+                             @if (item.question.ToString().Length >= 25)
+                            {
+                                <div class="dropdown-message small">@item.question.Substring(0, 25) ...</div>
+
+                            }
+                            else
+                            {
+                                <div class="text-info">@item.question</div>
+
+                            }
+                            <span class="small text-muted">@item.date.ToShortTimeString()</span>
+
+                        </a>
+                       
+
+                 }
+               
+               
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item small" href="~/asks/Index">عرض كل الرسائل</a>
+            </div>
+        </li>
+
+
+
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-fw fa-bell"></i>
+                <span class="d-lg-none">
+                    الأشعارات
+                    <span class="badge badge-pill badge-warning">@request.ToString() جديد</span>
+                </span>
+                <span class="indicator text-info d-none d-lg-block">
+                    <i class="fa fa-fw fa-circle"></i>
+                </span>
+            </a><div class="dropdown-menu container-fluid" aria-labelledby="messagesDropdown">
+    <h6 class="dropdown-header">الرسائل الجديدة:</h6>
+    @foreach (var item in requesty)
+    {
+        <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="~/Request_to_edit/Edit_confirm/@item.ID">
+                        <strong>طلب تعديل حساب موظف</strong>
+                     
+                            <div class="text-warning">@item.dgreeid : @item.fullName</div>
+
+                        <span class="small text-muted">@item.date.ToShortTimeString()</span>
+
+                    </a>
+
+
+    }
+
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item small" href="~/Request_to_edit/Index">عرض كل الرسائل</a>
+</div>
+
+      
+           
+        </li>
+
+    </ul>
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+
+<div class="collapse navbar-collapse " id="navbarResponsive">
+
+    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+       
+         @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+            {
+                <content class="nav-item" data-toggle="tooltip" data-placement="right" title="المستخدم" style="right:0">
+
+                    @{
+                        var UserID = User.Identity.GetUserId();
+                        var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+                        @Html.AntiForgeryToken()  
+                     <div class="text-success" style="margin-bottom:10px;background-color:black;padding:6px;border-bottom-left-radius:15px"> <i class="fa fa-user-circle-o"></i> مرحبا بك يا : @CurrentUser.nikname </div>
+                        
+
+                    }
+                </content>
+                <li class="nav-item text-info " data-toggle="tooltip" data-placement="right" title="تسجيل الخروج"style="margin-right:1.4em">
+
+                    <a href="javascript:document.getElementById('logoff').submit()" class="btn btn-warning" style="margin-bottom:0.5em;margin-left:0.5em;border-bottom:ridge;border-radius:10px;padding:0.3em"><span class="nav-link-text"> <i class="fa fa-sign-out"></i> تسجيل الخروج </span></a>
+                </li>
+                            }
+
+
+                        }
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="التحكم في الموقع">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents5" data-parent="#exampleAccordion">
+                <span class="nav-link-text">التحكم في الموقع</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponents5">
+                <li>
+                    <a href="~/Carsuals">الأخبار الرئيسية</a>
+                </li>
+                <li>
+                    <a href="~/socials">مواقع التواصل الأجتماعي</a>
+                </li>
+                <li>
+                    <a href="~/footers/Index">تصنيفات التذييل</a>
+                </li>
+                <li>
+                    <a href="~/contacts/Index">معلومات التواصل</a>
+                </li>
+                <li>
+                    <a href="~/privacy/Index">سياسة الخصوصية & حول المطورين</a>
+                </li>
+                <li>
+                    <a href="~/asks/Index">الدعم والأسئلة</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="البيانات العامة">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion">
+                            
+                <span class="nav-link-text">البيانات العامة</span>
+                            
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponents1">
+                <li>
+                    <a href="~/Categories">التصنيفات</a>
+                </li>
+                <li>
+                    <a href="~/cardinfoes">الرئيسية</a>
+                </li>
+
+            </ul>
+        </li>
+       
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="الصلاحي إكسبرس">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponent" data-parent="#exampleAccordion">
+                            
+                <span class="nav-link-text">الصلاحي إكسبرس</span>
+                      
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponent">
+              
+                <li>
+                    <a href="~/agents">نقاط الخدمة</a>
+                </li>
+              
+            </ul>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="الموظفين">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2" data-parent="#exampleAccordion">
+                        
+                <span class="nav-link-text">الموظفين</span>
+                           
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponents2">
+                <li>
+                    <a href="~/staffs">الرئيسية</a>
+                </li>
+                <li>
+                    <a href="~/Request_to_edit">طلبات الموظفين</a>
+                </li>
+
+            </ul>
+        </li>
+        @*<li class="nav-item" data-toggle="tooltip" data-placement="right" title="البحوث & الرسائل">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents3" data-parent="#exampleAccordion">
+                          
+                <span class="nav-link-text">البحوث & الرسائل</span>
+                            
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponents3">
+                <li>
+                    <a href="~/Theses">الرئيسية</a>
+                </li>
+            </ul>
+        </li>*@
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="إدارة المستخدمين">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents4" data-parent="#exampleAccordion">
+                <span class="nav-link-text">إدارة المستخدمين</span>
+                            
+
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponents4">
+                @*<li>
+                    <a href="~/Roles">الصلاحيات</a>
+                </li>*@
+                <li>
+                    <a href="~/ApplicationUsers/index">الرئيسية</a>
+                </li>
+
+            </ul>
+        </li>
+  
+    </ul>
+    <ul class="navbar-nav sidenav-toggler shadow-active"style="background-color:black;">
+        <li class="nav-item thumbnail" style="border-radius:50px;border: outset; margin-left: -39px;  margin-right:-12px">
+            <a class="nav-link text-center " id="sidenavToggler" style="color:black">
+                <i class="fa fa-fw fa-angle-right "style="color:white;padding-left: 10px"></i>
+            </a>
+        </li>
+    </ul>
+   
+
+</div>
+</nav>
+<div class="content-wrapper">
+<div class="container-fluid" style="direction:rtl;padding-bottom:1em;margin-right:1em;padding-left:1em;overflow-y:hidden" id="mohsen">
+<!-- Breadcrumbs-->
+         
+    @RenderBody()
+           
+</div>
+    
+<!-- /.container-fluid-->
+<!-- /.content-wrapper-->
+       
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded"style="display: inline;
+    color: #000000;
+    background: #ffc107;" href="#page-top">
+<i class="fa fa-angle-up"></i>
+</a>
+       
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/toastr")          
+   
+@RenderSection("script", required: false)
+
+
+</body>
+</html>
+@RenderSection("scripts", required: false)
+
+
+
+<script src="~/vendor1/jquery/jquery.min.js"></script>
+<script src="~/vendor1/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="~/vendor1/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="~/vendor/jquery.dataTables.min.js"></script>
+<script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<script src="~/AdenScript/sb-admin.min.js"></script>
+@*<script src="~/vendor/jquery.nicescroll.min.js"></script>
+<script>$("html").niceScroll();</script>*@

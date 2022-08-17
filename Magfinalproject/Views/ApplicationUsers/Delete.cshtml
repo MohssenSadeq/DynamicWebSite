@@ -1,0 +1,91 @@
+﻿@model Magfinalproject.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "المستخدمين / الحذف";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:60px;padding-top:25px" class="text-danger">الحذف</h2>
+<h3 style="padding-right:60px;padding-top:25px" class="text-danger">هل أنت متأكد للقيام بعملية الحذف ؟</h3>
+<div>
+
+    <hr />
+    <dl class="form-horizontal " style="padding-right:5em;padding-top:1em">
+        <dt>
+            @Html.DisplayName("نوع المستخدم")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType)
+        </dd>
+        <dt>
+            @Html.DisplayName("إسم المستخدم")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayName("البريد الإلكتروني")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayName("كلمة السر")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PasswordHash)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayName("رقم التلفون")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+
+
+
+
+        <dt>
+            @Html.DisplayName("تفعيل القفل")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LockoutEnabled)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayName("الأسم التعريفي")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-right:40px">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("الرجوع إلى القائمة", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Magfinalproject.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "المستخدمين / الرئيسية";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+
+
+<p>
+    <i class="fa fa-edit text-dark">  </i> @Html.ActionLink("إنشاء جديد", "Create")
+</p>
+<div id="page-wrapper" class="mohsen">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table style="width:100%;direction:rtl" class="table table-secondary table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayName("نوع المستخدم")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("إسم المستخدم")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("البريد الإلكتروني")
+                                </th>
+                               
+
+                                <th>
+                                    @Html.DisplayName("كلمة السر")
+                                </th>
+                               
+                                <th>
+                                    @Html.DisplayName("رقم التلفون")
+
+
+                                </th>
+                               
+                               
+                               
+                                <th>
+                                    @Html.DisplayName(" الإسم التعريفي")
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nikname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+
+                                    </td>
+                                    
+                                    <td>
+                                        @Html.EditorFor(modelItem => item.PasswordHash)
+                                    </td>
+                                   
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+
+                                    </td>
+                                   
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        <a href="~/ApplicationUsers/Edit/@item.Id" title="تعديل" class="btn btn-default btn-sm text-dark"><i class="fa fa-pencil fa-lg"></i></a> |
+                                        <a href="~/ApplicationUsers/Details/@item.Id" title="تفاصيل" class="btn btn-default btn-sm text-info"><i class="fa fa-info-circle fa-lg"></i></a> |
+                                        <a href="~/ApplicationUsers/Delete/@item.Id" title="حذف" class="btn btn-default btn-sm text-danger"><i class="fa fa-remove fa-lg"></i></a>
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+</div>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/vendor/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Success"))
+     {
+       @:toastr.success("تمت الإظافة بنجاح.");
+
+            }
+        });
+
+        $(document).ready(function () {
+            @if (TempData.ContainsKey("Delete"))
+
+           {
+                @:toastr.info("تم الحذف بنجاح.");
+
+            }
+        });
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Edit"))
+          {
+              @:toastr.info("تم التعديل بنجاح.");
+
+          }
+        });
+    </script>
+
+}

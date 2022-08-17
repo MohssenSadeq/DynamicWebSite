@@ -1,0 +1,174 @@
+﻿@model IEnumerable<Magfinalproject.Models.Categorie>
+
+@using Magfinalproject.Models;
+
+@{
+
+    ViewBag.Title = " آخر الأخبار / كل المنشورات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+    var card = db.cardinfoes;
+    var cat = db.Categories.Where(a => a.classname == "الأحداث").FirstOrDefault();
+
+    var mk = 1;
+    var s = 1;
+
+}
+<style>
+    h2 {
+        color: white;
+        border-color: black;
+    }
+
+    .carousel-caption {
+        border-radius: 20px;
+        padding: 15px;
+    }
+</style>
+<div class="container-fluid row">
+
+    <div class="jumbotron-fluid" style="background-color:#002147;padding:5em;padding-right:8em">
+        <h1 style="color:white">
+            آخر الأخبار
+        </h1>
+    </div>
+    <style>
+        .img {
+            height: 500px !important;
+            width: 100%;
+            object-fit: cover !important;
+        }
+    </style>
+
+
+
+
+    <div class="row" style="margin:1em">
+        @foreach (var item in card.Where(itemm => itemm.Category.classname == "الأخبار").OrderByDescending(i => i.date).Take(15))
+        {
+            if (mk == 1)
+            {
+                <div class="col-sm-12 text-info" style="margin:1.3em;font-size:larger">@Html.ActionLink("عرض الكل", "allnews", "Categories", new { id = cat.ID }, new { @class = " text-link" })  </div>
+                <hr />
+            }
+
+
+            if (mk <= 3)
+            {
+
+            }
+
+            else
+            {
+                if (mk <= 11 && mk > 3)
+                {
+
+                    <div class="col-xs-12 col-sm-3  col-sm-3 col-lg-3 thumbnail " style="margin-right:10px;max-width:300px;height:430.28px;background-color:white ; border:ridge">
+                        <img src="~/uploads/@item.pic" class="img-rounded" style=" height:181px " />
+                        <div style="height:100px; padding-right:15px">
+                            @{ if (item.title.Length <= 30)
+                        {
+                                    <h3>@Html.ActionLink(Html.DisplayFor(model => item.title).ToString(), "Detailspost", "cardinfoes", new { id = item.ID }, new { @class = " text-info" })  </h3>
+
+                                }
+                                else
+                                {
+                                    <h3>@Html.ActionLink(Html.DisplayFor(model => item.title).ToString().Substring(0, 30) + "...", "Detailspost", "cardinfoes", new { id = item.ID }, new { @class = " text-info" })  </h3>
+
+                                }
+                            }
+                            @if (item.describtion.Length >= 190)
+                        {
+                                <hr /><hr /><h4 style="color:slategray">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => item.describtion).ToString().Substring(0, 190) + " ..."))
+                                </h4>
+
+
+                            }
+                            else
+                            {               <hr /><h4 style="color:slategray">
+                                @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => item.describtion).ToString()))
+                            </h4>
+
+                            }
+                            <hr />
+                            <h6 style="color:slategray">  <span class="fa fa-clock-o"></span> @Html.DisplayFor(subIem => item.date) </h6>
+                        </div>
+                    </div>
+                                }
+                                else
+                                {
+                                    if (mk == 12)
+                                    {
+                                        @Html.Raw(HttpUtility.HtmlDecode("<div id='collapse' class='collapse'>"))
+                                    }
+
+                                    <div class="col-xs-12 col-sm-4 col-sm-4 col-lg-4    thumbnail " style="margin-right:10px ;max-width:300px;height:430.28px ; border:ridge ">
+                                        <img src="~/uploads/@item.pic" class="img-rounded" style=" height:181.28px " />
+                                        <div style="height:100px ; padding-right:15px">
+                                            <h3>@Html.ActionLink(Html.DisplayFor(model => item.title).ToString(), "Detailspost", "cardinfoes", new { id = item.ID }, new { @class = " text-info" })  </h3>
+                                            @if (item.describtion.Length >= 190)
+                        {
+
+                                                <hr /><h4 style="color:slategray">
+                                                    @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => item.describtion).ToString().Substring(0, 190) + " ..."))
+                                                </h4>
+
+
+                                            }
+                                            else
+                                            {               <hr /><h4 style="color:slategray">
+                                                @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => item.describtion).ToString()))
+                                            </h4>
+
+                                            }
+                                            <hr />
+                                            <h6 style="color:slategray">  <span class="fa fa-clock-o"></span> @Html.DisplayFor(subIem => item.date) </h6>
+                                        </div>
+                                    </div>
+                                    if (mk == 15)
+                                    {
+                                        @Html.Raw(HttpUtility.HtmlDecode("</div>"))
+
+                                        <div class="col-xs-12"><button type="button" id="more" class="btn btn-primary " style="margin-bottom:40px" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse"> عرض أكثر <span class="glyphicon glyphicon-arrow-down"></span></button></div>
+
+                                            }
+                                        }
+                                    }
+
+
+                                    mk++;
+
+
+
+
+                                }
+    </div>
+
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/AdenScript/show more.js"></script>
+
+
+
+
+
+</div>
+
+<style>
+    img {
+        display: block;
+        width: auto;
+        height: auto;
+    }
+
+    h3 {
+        font-size: 1.113em;
+        font-weight: 400;
+        color: black;
+    }
+
+    h6 {
+        margin-top: -5px !important;
+    }
+</style>

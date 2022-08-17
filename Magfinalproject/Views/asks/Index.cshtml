@@ -1,0 +1,224 @@
+﻿@model IEnumerable<Magfinalproject.Models.ask>
+
+@{
+    ViewBag.Title = "الطلبات / الرئيسية";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<p>
+    <i class="fa fa-edit text-dark">  </i> @Html.ActionLink("إنشاء جديد", "CreateC")
+</p>
+<style>
+    .col-sm-6 {
+        float: left;
+    }
+</style>
+
+<div id="page-wrapper" class="mohsen">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table style="width:100%;direction:rtl" class="table table-secondary table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.userid)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.fname)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.lname)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.date)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.subject)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.question)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.answer)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.priority)
+                                </th>
+                                <th></th>
+                            </tr>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    @if (item.userid != null)
+                                    {
+                                        <td>
+                                            @Html.ActionLink(Html.DisplayFor(modelItem => item.user.nikname).ToString(), "Details", "ApplicationUsers", new { id = item.userid }, new { @class = " text-info" })
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.user.nikname)
+
+                                        </td>
+                                    }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.lname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.date)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                  
+                                        @Html.DisplayFor(modelItem => item.subject)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.question)
+                                    </td>
+                                    
+                                    <td>
+                                        @if (item.answer == null)
+                                        {
+                                            @Html.Label("لم يتم الرد بعد", htmlAttributes: new { @class = "text-danger" })
+                                        }
+                                         else if (item.answer.Length >= 120)
+                                         {
+                                           <p> @Html.DisplayFor(modelItem => item.answer).ToString().Substring(0, 120) ... </p> 
+                                        }
+                                        else
+                                        {
+                                                @Html.DisplayFor(modelItem => item.answer)
+                                            }
+
+
+                                        
+                                        
+                                    </td>
+                                    <td>
+                                          @if (item.answer == null)
+                                          {
+                                            <a href="~/asks/Edit/@item.id" title="إظافة رد" class=" btn btn-default btn-sm text-dark"><i class="fa fa-mail-reply fa-lg"></i> | </a> 
+
+                                          }
+                                        <a href="~/asks/Details/@item.id" title="تفاصيل" class="btn btn-default btn-sm text-info"><i class="fa fa-info-circle fa-lg"></i></a> |
+                                        <a href="~/asks/Delete/@item.id" title="حذف" class="btn btn-default btn-sm text-danger"><i class="fa fa-remove fa-lg"></i></a>
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.priority)
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+</div>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/vendor/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Success"))
+     {
+       @:toastr.success("تمت الإظافة بنجاح.");
+
+            }
+        });
+
+        $(document).ready(function () {
+            @if (TempData.ContainsKey("Delete"))
+
+           {
+                @:toastr.info("تم الحذف بنجاح.");
+
+            }
+        });
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Edit"))
+          {
+              @:toastr.info("تم التعديل بنجاح.");
+
+          }
+        });
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

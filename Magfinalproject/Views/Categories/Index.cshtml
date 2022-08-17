@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Magfinalproject.Models.Categorie>
+
+@{
+    ViewBag.Title = "التصنيفات / الرئيسية";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title </li>
+</ol>
+
+
+
+
+<p class="mohsen">
+    <i class="fa fa-edit text-dark">  </i> @Html.ActionLink("إنشاء جديد", "Create") 
+</p>
+<div id="page-wrapper" class="mohsen">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table style="width:100%;direction:rtl" class="table table-secondary table-hover" id="dataTables-example">
+                        <thead>
+
+                            <tr>
+                               
+                                <th>
+                                    @Html.DisplayNameFor(model => model.userid)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.classname)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.date)
+                                </th>
+                                <th></th>
+                            </tr>
+                               <tbody>
+                            @foreach (var item in Model.OrderByDescending(en => en.date))
+                            {
+                                <tr>
+                                    @if (item.userid != null)
+                                    {
+                                        <td>
+                                            @Html.ActionLink(Html.DisplayFor(modelItem => item.user.nikname).ToString(), "Details", "ApplicationUsers", new { id = item.userid }, new { @class = " text-info" })
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.user.nikname)
+
+                                        </td>
+                                    }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.classname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.date)
+                                    </td>
+                                    <td>
+                                        <a href="~/categories/Edit/@item.ID" title="تعديل" class="btn btn-default btn-sm text-dark"><i class="fa fa-pencil fa-lg"></i></a> |
+                                        <a href="~/categories/Details/@item.ID" title="تفاصيل" class="btn btn-default btn-sm text-info"><i class="fa fa-info-circle fa-lg"></i></a> |
+                                        <a href="~/categories/Delete/@item.ID" title="حذف" class="btn btn-default btn-sm text-danger"><i class="fa fa-remove fa-lg"></i></a>
+
+                                    </td>
+                                </tr>
+                            }
+
+                            </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+</div>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/vendor/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+     
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Success"))
+     {
+       @:toastr.success("تمت الإظافة بنجاح.");
+
+            }
+        });
+
+        $(document).ready(function () {
+            @if (TempData.ContainsKey("Delete"))
+
+           {
+                @:toastr.info("تم الحذف بنجاح.");
+
+            }
+        });
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Edit"))
+          {
+              @:toastr.info("تم التعديل بنجاح.");
+
+          }
+        });
+</script>
+
+}

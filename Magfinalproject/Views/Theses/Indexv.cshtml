@@ -1,0 +1,56 @@
+﻿
+@model IEnumerable<Magfinalproject.Models.college>
+@using Magfinalproject.Models;
+
+
+@{
+    ViewBag.Title = "رسائل علمية";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var item = Model;
+  
+}
+
+
+<div class=" row page-header-row">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Home/Index">الرئيسية</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewBag.Title</li>
+    </ol>
+
+    @foreach (var subItem in item)
+            {<h2 class="mohsen">@Html.DisplayFor(modelItem => subItem.name)</h2>
+
+
+            <hr />
+            <div class="form-horizontal">
+
+                <div class="row panel-body mohsen">
+                    @foreach (var it in subItem.department.Where(a =>a.thesis.Count > 0))
+                    {
+                        <div class="col-xs-6 col-sm-4  col-md-3 col-lg-3 thumbnail" style="margin-right:10px;max-width:300px;max-height:281.28px;background-color:white ; border:ridge">
+                            <img src="~/uploads/@it.photo" class="img-rounded" style="width:100%;height:181px " />
+                            <div style="height:100px; padding-right:15px">
+                                @{ if (it.name.Length <= 30)
+                                    {
+                                        <h3> @Html.ActionLink("قسم " + Html.DisplayFor(model => it.name).ToString(), "Index", "Theses", new { id = it.id }, new { @class = " text-info" })  </h3>
+
+                                    }
+                                    else
+                                    {
+                                        <h3>قسم @Html.ActionLink(Html.DisplayFor(model => it.name).ToString().Substring(0, 30) + "...", "Index", "Theses", new { id = it.id }, new { @class = " text-info" })  </h3>
+
+                                    }
+                                }
+                                <h5><span class="fa fa-mail-reply"></span>  عدد الرسائل @Html.DisplayFor(subIem => it.thesis.Count)</h5>
+                                <h6 style="color:slategray">  <span class="fa fa-clock-o"></span> @Html.DisplayFor(subIem => it.college.date) </h6>
+                            </div>
+                        </div>
+                                    }
+                </div>
+
+            </div>                  }
+
+
+</div>

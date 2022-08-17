@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Magfinalproject.Models.college>
+
+@using Magfinalproject.Models;
+@{
+    ViewBag.Title = "كل الوكلاء";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+    var depart  = db.departments;
+    var col = db.colleges;
+
+}
+<link href="~/Content/animate.css" rel="stylesheet" />
+
+<div class="jumbotron-fluid" style="background-color:#002147;padding:5em">
+    <h1 style="color:white">
+        الوكلاء
+    </h1>
+</div>
+<div class=" row page-header-row">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Home/Index">الرئيسية</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewBag.Title</li>
+    </ol>
+    <div class="row" style="width:100%;padding:0;margin:0">
+        <div class="col-sm-12"style="margin-right:30px">
+              @{
+                  foreach (var item in Model.Where(a => a.center.classname == "وكيل"))
+                  {
+                      @*<h2 class="mohsen">وكيل : @item.name</h2>*@
+                          @*<hr />*@
+                     
+
+
+                              <div class="col-xs-6 col-sm-4  col-md-3 col-lg-3 thumbnail " style="margin-right:10px;background-color:white ; border:ridge;height:600px;width:321px;margin-right:4em;margin-top:2em;border-radius:15px">
+                                  <img src="~/uploads/@item.photo" class="img-rounded" style="width:100%;height:200px " />
+                                  <div style="height:100px; padding-right:15px">
+
+
+                                      <h3>كلية : @Html.ActionLink(Html.DisplayFor(model => item.name).ToString(), "DetailsV", "colleges", new { id = item.id }, new { @class = " text-info" })  </h3>
+
+
+                                      @{
+                                          <div style="color:#9a9a9a">
+                                              @if (item.about.Length >= 130)
+                                              {
+
+                                              @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => item.about).ToString().Substring(0, 130) + " ..."))
+
+
+                                              }
+                                              else
+                                              {
+                                              @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => item.about).ToString()))
+
+                                              }
+                                          </div>
+                                         
+
+                                      }
+                                      <hr />
+                                      <h4>فروع الوكيل</h4>
+                                      <hr />
+                                      <div class=" ">
+                                          <div class="aside-widget ">
+                                              <div class="row">
+
+                                                  @foreach (var subItem in depart.Where(a => a.collegeid == item.id).Take(3))
+                                                  {
+
+
+                                                      <div class="col-sm-4 col-xs-4 thumbnail " style="max-width:128px;max-height:120px;text-align:center;margin:0">
+
+                                                          <img class="img-circle " src="~/uploads/@subItem.photo" alt="" style=" width:70px; height:70px">
+
+                                                          <p style="text-align:center">@Html.ActionLink(@Html.DisplayFor(modelItem => subItem.name).ToString(), "DetailsV", "Departments", new { id = subItem.id }, new { @class = "category-heading" })</p>
+
+                                                      </div>
+
+
+                                                  }
+                                                 
+                                              </div>
+                                              <hr />
+                                              <div style="margin-right:10px;margin-bottom:10px">
+                                               
+                                                  <h5 class="text-primary"> @Html.ActionLink("تفاصيل أكثر", "DetailsV", "colleges", new { id = item.id }, new { @class = " text-info" })  </h5>
+
+                                              </div>
+                                              
+
+
+                                          </div>
+                                      </div>
+
+                          </div>
+
+                      </div>
+                                           
+
+                                          }             
+
+
+              }
+
+          </div>
+
+    </div>
+          
+
+      </div>
+   <script src="~/Scripts/wow.min.js"></script>
+<script>
+        new WOW().init();
+</script>

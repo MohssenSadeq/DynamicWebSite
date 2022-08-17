@@ -1,0 +1,85 @@
+﻿@model Magfinalproject.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "المعلومات / التفاصيل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:65px;padding-top:30px">التفاصيل</h2>
+
+<div>
+
+    <hr />
+    <dl class="form-horizontal " style="padding-right:65px;padding-left:65px">
+        <dt>
+            @Html.DisplayName("نوع المستخدم")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType)
+        </dd>
+        <dt>
+            @Html.DisplayName("إسم المستخدم")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayName("البريد الإلكتروني")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    
+        <dt>
+            @Html.DisplayName( "كلمة السر")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PasswordHash)
+        </dd>
+
+        
+        <dt>
+            @Html.DisplayName("رقم التلفون")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+      
+
+      
+
+        <dt>
+            @Html.DisplayName("تفعيل القفل")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LockoutEnabled)
+        </dd>
+
+      
+
+        <dt>
+            @Html.DisplayName("الأسم التعريفي")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p style="padding-right:65px">
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.Id}) |
+    @Html.ActionLink("الرجوع إلى القائمة", "Index")
+</p>

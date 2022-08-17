@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Magfinalproject.Models.Categorie>
+@{
+    ViewBag.Title = "cardinfo";
+}
+
+
+@foreach (var items in Model)
+{
+    foreach (var item in items.cardinfo)
+    {
+       
+            <li style="text-align:right" class="link-block ">@Html.ActionLink(Html.DisplayFor(modelItem => item.title).ToString(), "Details","cardinfoes", new { id = item.ID }, new { @class = "text-info" })</li>
+    }
+}
+
+
+
+

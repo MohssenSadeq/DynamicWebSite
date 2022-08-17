@@ -1,0 +1,101 @@
+﻿@model Magfinalproject.Models.ask   
+@{
+    ViewBag.Title = "الأسئلة / أظافة رد";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<style>
+    .row, form,textarea {
+        width: 100%;
+    }
+    textarea{
+        height:200px;
+                 direction:rtl;
+                 text-align:right;
+    }
+  
+</style>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+
+<hr />
+<div class="row">
+@using (Html.BeginForm("Edit", "asks", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+{                   <dl class="mdi-format-vertical-align-top" style="padding-right:65px;padding-left:65px">
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.fname)
+        @Html.HiddenFor(model => model.Email)
+        @Html.HiddenFor(model => model.date)
+        @Html.HiddenFor(model => model.subject)
+        @Html.HiddenFor(model => model.question)
+        @Html.HiddenFor(model => model.lname)
+        @Html.HiddenFor(model => model.userid)
+
+
+        <dt>
+            @Html.DisplayName("أسم المرسل :")
+        </dt>
+
+        <dd>
+            @Html.LabelForModel(Model.fname+" "+Model.lname, new { @class = " text-info" })
+        </dd>
+
+        <dt>
+            @Html.DisplayName("العنوان :")
+        </dt>
+
+        <dd>
+            @Html.LabelForModel(Model.subject, new { @class = " text-info" })
+        </dd>
+
+        <dt>
+            @Html.DisplayName("السؤال :")
+        </dt>
+
+        <dd>
+            @Html.LabelForModel(Model.question, new { @class = " text-info" })
+        <hr />
+            </dd>
+                        <dt>
+                            @Html.DisplayName("الأولوية: ")
+                           
+                        </dt>
+
+                        <dd>
+                        <span class="row"> @Html.EditorFor(model => model.priority, new { htmlAttributes = new { @type = "number", @Min = "1", @Max = "100", @Value = "50", @class = "form-control" } })</span>  
+                            <i>كلما كانت القيمة أقرب إلى ال مئة سيضهر الخبر في أعلى القائمة.</i></dd>
+    </dl>
+          <hr />
+
+        <div class="form-group"style="padding-right:65px">
+            @Html.LabelForModel("الرجاء كتابة الرد في الحقل أدناه:", htmlAttributes: new { @class = "control-label col-sm-2 text-info" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.answer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.answer, "", new { @class = "text-danger" })
+
+
+            </div>
+        </div>
+        <div class="form-group"style="padding-right:65px">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="إرسال رد" class="btn btn-primary" />
+            </div>
+        </div>
+
+
+        }
+
+</div>  
+
+<p style="padding-right:65px">
+    @Html.ActionLink("الرجوع إلى القائمة", "Index")
+</p>

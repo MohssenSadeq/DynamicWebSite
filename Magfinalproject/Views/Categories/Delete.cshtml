@@ -1,0 +1,50 @@
+﻿@model Magfinalproject.Models.Categorie
+
+@{
+    ViewBag.Title = "التصنيفات / الحذف";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+
+<h2 style="padding-right:60px;padding-top:25px" class="text-danger">الحذف</h2>
+<h3 style="padding-right:60px;padding-top:25px" class="text-danger">هل أنت متأكد للقيام بعملية الحذف ؟</h3>
+
+    <hr />
+    <dl class="form-horizontal  " style="padding-right:5em;padding-top:1em">
+        <dt>
+            @Html.DisplayNameFor(model => model.classname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.classname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        </dl>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+        <div class="form-actions no-color"style="padding-right:40px">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("الرجوع الى القائمة", "Index")
+        </div>
+}
+
+

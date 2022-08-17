@@ -1,0 +1,113 @@
+﻿@model Magfinalproject.Models.contacts
+
+@{
+    ViewBag.Title = "معلومات التواصل / التفاصيل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:65px;padding-top:30px">التفاصيل</h2>
+    <style>
+        dd{   
+     direction: ltr;
+    text-align: right;
+    text-rendering: geometricPrecision;}
+    </style>
+<div>
+
+    <hr />
+    <dl class="form-horizontal" style="padding-right:65px;padding-left:65px">
+        <dt>
+            @Html.DisplayNameFor(model => model.control_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.control_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password_control)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password_control)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contact_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password_contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password_contact)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephone )
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+    </dl>
+</div>
+<p style="padding-right:65px">
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("الرجوع إلى القائمة", "Index")
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

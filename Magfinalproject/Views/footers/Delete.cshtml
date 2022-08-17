@@ -1,0 +1,73 @@
+﻿@model Magfinalproject.Models.footer
+
+@{
+    ViewBag.Title = "التذييل / الحذف";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:60px;padding-top:25px" class="text-danger">الحذف</h2>
+<h3 style="padding-right:60px;padding-top:25px" class="text-danger">هل أنت متأكد للقيام بعملية الحذف ؟</h3>
+<div>
+   
+    <hr />
+    <dl class="form-horizontal " style="padding-right:5em;padding-top:1em">
+        <dt>
+            @Html.DisplayNameFor(model =>model.mainfoot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model =>model.mainfoot)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.describtion)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.describtion).ToString()))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic)
+
+
+        </dt>
+
+        <dd>
+            <img src="~/uploads/@Model.pic" class="thumbnail" style="width:48px; height:48px" />
+
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-right:40px">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("الرجوع إلى القائمة", "Index")
+        </div>
+    }
+</div>

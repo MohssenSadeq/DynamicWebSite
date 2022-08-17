@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Magfinalproject.Models.footer>
+
+@{
+    ViewBag.Title = ViewBag.mo;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<ol class="breadcrumb" style="font-size:large">
+    <li class="breadcrumb-item">
+        <a href="~/Home/Index">الرئيسية</a>
+    </li>
+    <li class="breadcrumb-item active"style="color:black">
+        @ViewBag.Title
+    </li>
+</ol>
+<hr />
+<div class="form-horizontal">
+
+    <div class="row panel-body mohsen">
+        @foreach (var subItem in Model)
+            {
+            <div class="col-sm-3 thumbnail " style="margin-left:20px; margin-bottom:30px;width:290.14px ;height:380.28px ">
+                <img src="~/uploads/@subItem.pic" class="img-rounded" style="width:302.14px;height:181.28px " />
+                <div style="height:100px">
+                    @{ if (subItem.title.Length <= 30)
+                        {
+                            <h3>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "footers", new { id = subItem.ID }, new { @class = " text-info" })  </h3>
+
+                        }
+                        else
+                        {
+                            <h3>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString().Substring(0, 30) + "...", "Detailspost", "footers", new { id = subItem.ID }, new { @class = " text-info" })  </h3>
+
+                        }
+                    }                            <h6 style="color:slategray">  <span class="fa fa-clock-o"></span> @Html.DisplayFor(subIem => subItem.date) </h6>
+                </div>
+                @Html.ActionLink("التفاصيل", "Detailspost", "footers", new { id = subItem.ID }, new { @class = "btn btn-primary" })
+
+            </div>
+                        }
+    </div>
+
+</div>
+
+

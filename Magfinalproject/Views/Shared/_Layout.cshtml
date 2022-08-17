@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 
+            <!-- Primary Meta Tags -->
+            <title>شـركة الصـلاحـي للصرافة والتحويلات: Al-Salahi Exchange & Transfers Co.</title>
+            <meta name="title" content="شـركة الصـلاحـي للصرافة والتحويلات: Al-Salahi Exchange & Transfers Co.">
+            <meta name="description" content="شركة الصلاحي للصرافة والتحويلات Al-Salahi Exchange Co. ">
+            <!-- Open Graph / Facebook -->
+            <meta property="og:type" content="website">
+           
+            <meta property="og:title" content="شـركة الصـلاحـي للصرافة والتحويلات: Al-Salahi Exchange & Transfers Co.">
+            <meta property="og:description" content="شركة الصلاحي للصرافة والتحويلات Al-Salahi Exchange Co. ">
+            <!-- Twitter -->
+            <meta property="twitter:card" content="summary_large_image">
+            <meta property="twitter:title" content="شـركة الصـلاحـي للصرافة والتحويلات: Al-Salahi Exchange & Transfers Co.">
+            <meta property="twitter:description" content="شركة الصلاحي للصرافة والتحويلات Al-Salahi Exchange Co. ">
+            <meta property="og:title" content="شـركة الصـلاحـي للصرافة والتحويلات: Al-Salahi Exchange & Transfers Co.">
+            <meta property="og:description" content="شركة الصلاحي للصرافة والتحويلات Al-Salahi Exchange Co. ">
+            <!-- Twitter -->
+            <meta property="twitter:card" content="summary_large_image">
+            <meta property="twitter:title" content="شـركة الصـلاحـي للصرافة والتحويلات: Al-Salahi Exchange & Transfers Co.">
+            <meta property="twitter:description" content="شركة الصلاحي للصرافة والتحويلات Al-Salahi Exchange Co. ">
+
+
+
+    @using Magfinalproject.Models;
+
+    @{
+        ViewBag.Title = "الرئيسية";
+        ApplicationDbContext db = new ApplicationDbContext();
+        var footer = db.footers;
+        var privacy = db.footers.Where(a => a.mainfoot.ToString() == "سياسة الخصوصية").FirstOrDefault();
+        var dev = db.footers.Where(a => a.mainfoot.ToString() == "برمجة وتصميم الموقع").FirstOrDefault();
+
+        var social = db.socials;
+        var express = db.cardinfoes.Where(a => a.Category.classname.ToString() == "الصلاحي إكسبرس");
+        var about = db.cardinfoes.Where(a => a.Category.classname.ToString() == "حول الشركة");
+
+        var contact = db.contacts.Where(a => a.id != 0).FirstOrDefault();
+    }
+    @Styles.Render("~/bundles/toastr")
+
+
+    <link href="~/AdenCss/bootstrap.rtl.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scaleable=no">
+    <title>@ViewBag.Title - Al-Salahi Exchange & Transfers Co. </title>
+    <link href="~/Content/animate.css" rel="stylesheet" />
+
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <link href="~/vendor/sb-admin-2.css" rel="stylesheet" />
+    <link href="~/AdenCss/css__qX9Tr.css" rel="stylesheet" />
+    <link href="~/AdenCss/newstyle.css" rel="stylesheet" />
+    <link href="~/AdenCss/css__hGYB.css" rel="stylesheet" />
+    <link href="~/AdenCss/css__pZS.css" rel="stylesheet" />
+    <link href="~/Content/font.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-social/bootstrap-social.css" rel="stylesheet" />
+    <link href="~/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet" />
+    <link href="~/vendor/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/vendor/animate.css" rel="stylesheet" />
+    <style>
+        a, button {
+            display: inline-block;
+            text-decoration: none;
+            color: inherit;
+            line-height: 1.3;
+            -webkit-transition: all .25s ease-in-out;
+        }
+
+        .contact {
+            direction: ltr;
+            text-align: right;
+            text-rendering: geometricPrecision;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="front not-logged-in no-sidebars page-node page-node- page-node-1110 node-type-oxweb-homepage domain-oxweb no-sidebar-first vid-1835756 jquery-once-1-processed root-menus desktop container-fluid" style="background-color:#eee;">
+    <!-- Google Tag Manager -->
+    <header class="page-level page-header">
+        <div class="wrapper container-fluid">
+            <div id="page-header-row" class="row page-header-row">
+
+                <figure class="logo ">
+                    <a href="~/Home" title="Home" id="site-name-square"><img id="im" src="~/uploads/LOGO.png" /></a>
+                    <style>
+                        #im{
+                        max-width:300px !important;
+                        max-height:300px !important;
+                        }
+                    </style>
+                </figure>
+                @*<h5 style="color:white;text-align:right;font-family: cairo;max-width:600px;max-height:80px"><a herf="~/Home">شركة الصلاحـي للصرافة والتحويلات</a></h5>*@
+
+                <div class="menu-wrapper">
+                    <div id="site-header-top" class="site-header-top" style="">
+                        <div id="block-block-23" class="block block-block oxweb-academic-divisions block-block-23 ">
+                            <!-- Main menu link -->
+
+                        </div>
+
+                    </div>
+                    <div id="site-header-bottom" class="site-header-bottom" style="display: block;">
+                        <div id="block-oxweb-google-search-search-form" class="block block-oxweb-google-search block-oxweb-search block-oxweb-google-search-search-form"style="width:39%;left:0">
+                    
+                            @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                            {
+                                <div class="form-item form-type-textfield form-item-query">
+                                   <input title="ادخل المصطلح الذي تريد البحث عنه." placeholder="بحث..." type="text" id="searchName" name="searchName" value="" size="30" maxlength="128" class="form-text" style="width:66%;height:47.59px;padding-left:0">
+                                     <button class="btn btn-primary form-text" type="submit"style="margin-right:0;height: 47.58px; width: 53px;    background-color: #ffb100;padding: 1px;">
+                                            <i class="fa fa-search"style="font-size:x-large"></i>
+                                        </button>
+                                </div>
+
+                            }
+                        </div>
+                        @*<nav id="block-menu-block-2" class="block block-menu-block oxweb-primary-menu-block homepage-role-base-menu block-menu-block-2 " role="navigation">
+
+                            <ul>
+                                <li><a href="~/colleges/allstaffs/" title="Staff Gateway">الموظفين</a></li>
+                                <li><a href="~/Home/student">الطلاب</a></li>
+                                <li><a href="~/home/alumni">الخريجين</a></li>
+                                <li><a href="~/Home/local">مجتمع محلي</a></li>
+                            </ul>
+
+                        </nav>*@
+                        <nav id="block-menu-block-4" class="block block-menu-block oxweb-secondary-menu-block oxweb-secondary-menu-block-noh2 homepage-oxweb-secondary-menu block-menu-block-4 " role="navigation">
+                            <ul>
+                                <li class="expanded">
+                                    <a href="#"> الصلاحي إكسبرس</a><ul>
+                         @foreach (var subItem in express)
+                                       {
+
+                                    <li>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "cardinfoes", new { id = subItem.ID }, new { @class = " text-link" })  </li>
+
+                             }
+
+                                    <li><a href="~/agents/allnews">نقاط الخدمة</a></li>
+                                    <li><a href="~/Home/makeques">تواصل ودعم</a></li>
+                                    </ul>
+                                </li>
+                          
+                                @*<li class="expanded">
+                                    <a href="~/colleges/alldepartments">الوكلاء</a>
+                                </li>*@
+                                <li class="expanded ">
+                                    <a href="#" title="">أخبار & أحداث</a><ul>
+                                        <li><a href="~/Home/lastnews">آخر الأخبار</a></li>
+                                        <li><a href="~/Home/lastevents">آخر الأحداث</a></li>
+                                       
+                                    </ul>
+                                <li class="expanded" style="border-left:0px">
+                                    <a href="#">حول</a>
+                                    <ul>
+                                        @foreach (var subItem in about)
+                                        {
+
+                                            <li>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "Cardinfoes", new { id = subItem.ID }, new { @class = " text-link" })  </li>
+
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid" style="background-color:#EEEEEE">
+        @RenderBody()
+    </div>
+    <footer id="page-footer" class="page-level page-footer" style="direction:rtl">
+        <div class="wrapper container-fluid">
+            <div class="row" style="text-align:right">
+                <div id="block-block-15" class="block block-block social-links block-block-15 ">
+
+                    <h2>تواصل معنا</h2>
+                    <div style="margin-bottom:1em">
+                        @foreach (var item in social)
+                        {
+                            <a class="btn btn-social-icon btn-@item.icon" href="@item.link"><i class="fa fa-@item.icon"></i></a>
+
+                        }
+
+                    </div>
+                </div>
+                <div id="block-block-14" class="block block-block site-map block-block-14 ">
+                    <div class="sitemap-item">
+                        <h2>معلومات حول</h2>
+                        <ul>
+                            @if (footer != null)
+                            {
+                                foreach (var subItem in footer.Where(itemm => itemm.mainfoot.ToString().Contains("معلومات حول")).OrderBy(or => or.title))
+                                {
+
+                                    <li>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "footers", new { id = subItem.ID }, new { @class = " text-link" })  </li>
+
+                                }
+                            }
+
+
+                        </ul>
+                    </div>
+
+                    <div class="sitemap-item">
+                        <h2>معلومات لأجل</h2><ul>
+                            @if (footer != null)
+                            {
+                                foreach (var subItem in footer.Where(ss => ss.mainfoot.ToString().Contains("معلومات لأجل")).OrderBy(or => or.title))
+                                {
+
+                                    <li>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "footers", new { id = subItem.ID }, new { @class = " text-link" })  </li>
+
+                                }
+                            }
+
+                        </ul>
+                    </div>
+
+                    <div class="sitemap-item">
+                        <h2>روابط سريعة</h2>
+
+                        <ul>
+                            @if (footer != null)
+                            {
+                                foreach (var subItem in footer.Where(ss => ss.mainfoot.ToString().Contains("روابط سريعة")).OrderBy(or => or.title))
+                                {
+
+                                    <li>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "footers", new { id = subItem.ID }, new { @class = " text-link" })  </li>
+
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="sitemap-item">
+                        <h2>تواصل معنا</h2>
+                        @if (contact != null)
+                        {
+                            <ul>
+                                <li class="contact">@contact.phone_num  <i class="fa fa-mobile-phone"></i> </li>
+                                <li class="contact">@contact.telephone  <i class="fa fa-phone"></i></li>
+                                <li class="contact">@contact.contact_email <i class="fa fa-envelope"></i></li>
+
+                            </ul>
+                        }
+
+                    </div>
+                </div>
+
+                <div id="block-block-16" class="block block-block legals-questions block-block-16 ">
+
+                    <ul>
+                        <li class="copyright">
+                            <p>&copy; @DateTime.Now.Year - شـركة الصـلاحـي للصرافة والتحويلات</p>
+
+                        </li>
+
+                        <li>
+                            <a href="~/Home/makeques">تواصل و دعم</a>
+                        </li>
+
+           
+            
+                        @if (dev != null)
+                        {
+                            <li>
+                                <a href="~/privacy/detailspost/@dev.ID">برمجة وتصميم الموقع</a>
+                            </li>
+                        }
+                        @if (privacy != null)
+                        {
+                            <li>
+                                <a href="~/privacy/detailspost/@privacy.ID">سياسة الخصوصية</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/toastr")
+
+
+    @RenderSection("Scripts", required: false)
+
+
+
+</body>
+</html>
+<script src="~/Scripts/jquery.object-fit.js"></script>
+
+<script src="~/Scripts/wow.min.js"></script>
+<script src="~/AdenScript/js__q4Z.js"></script>
+<script src="~/AdenScript/js__NA.js"></script>
+<script src="~/vendor/jquery.js"></script>
+<script src="~/vendor/jquery.dataTables.min.js"></script>
+<script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<script src="~/vendor/jquery.nicescroll.min.js"></script>
+<script>$("html").niceScroll();</script>

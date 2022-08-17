@@ -1,0 +1,61 @@
+﻿@model Magfinalproject.Models.college
+
+
+@{
+    ViewBag.Title = "الوكلاء / التفاصيل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+    var item = Model.department;
+}
+
+
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:65px;padding-top:30px"> @Html.DisplayFor(model => model.name)</h2>
+
+
+<div>
+
+    <hr />
+    <dl class="form-horizontal" style="padding-right:65px;padding-left:65px">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+              @Html.DisplayFor(model => model.name)
+          </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+         <dt >
+           @Html.DisplayNameFor(model => model.about)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.about).ToString()))
+        </dd>
+        <dt>
+        </dt>
+        @Html.DisplayNameFor(model => model.photo)
+
+
+        <dd>
+            <img src="~/uploads/@Model.photo" class="thumbnail" style="width:48px; height:48px" />
+        </dd>
+
+    </dl>
+</div>
+<p style="padding-right:65px">
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("الرجوع إلى القائمة", "Index")
+</p>

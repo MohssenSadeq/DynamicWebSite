@@ -1,0 +1,148 @@
+﻿@model Magfinalproject.Models.department
+<link href="~/AdenCss/style.css" rel="stylesheet" />
+@using Magfinalproject.Models;
+
+
+@{
+    ViewBag.Title = "نقاط الخدمة / "+Model.name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+    var it = db.departments;
+    var item = db.colleges;
+}
+
+<div class=" row page-header-row">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Home/Index">الرئيسية</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewBag.Title</li>
+    </ol>
+
+
+    <header id="header" style="direction:rtl">
+
+
+        <!-- Page Header -->
+        <div id="post-header" class="header-a">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10" style="padding-right:35px;margin-top:25px">
+
+                        <h1> @Html.DisplayFor(model => model.name)</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+    </header>
+    <div class="section ">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row" style="margin-right:13px">
+                <!-- Post content -->
+                <div class="col-sm-8">
+                    <div class="thumbnail " style="border: ridge">
+
+                        <div class="section-row sticky-container">
+                            <div class="main-post">
+                                <!--نعمل السي كاه ايدتور-->
+
+
+                                <figure class="figure-img">
+                                    <img class="thumbnail" src="~/uploads/@Model.photo" alt="" style="margin-top:25px;max-height:450px">
+                                    <figcaption><!--نعمل العنوان--></figcaption>
+                                </figure>
+                            </div>
+                            <div class="post-shares sticky-shares">
+                                <a href="#" class="share-facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="share-twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="share-google-plus"><i class="fa fa-google-plus"></i></a>
+                                <a href="#" class="share-pinterest"><i class="fa fa-pinterest"></i></a>
+                                <a href="#" class="share-linkedin"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-envelope"></i></a>
+                            </div>
+                        </div>
+
+
+                        <!-- author -->
+                        <div class="section-row">
+                            <div class="post-author">
+                                <div class="media">
+                                    <div class="media-left">
+
+                                    </div>
+                                    <div class="media-middle" style="padding:25px">
+                                        <div class="media-heading">
+                                            <h2><span class="fa fa-info-circle"></span>  حول</h2>
+                                        </div>
+                                        <p>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.about).ToString()))</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-sm-4 ">
+
+                    <div class="thumbnail " style="border: ridge">
+                        <div class="aside-widget " style="margin:5%">
+                            <div class="section-title">
+                                <h3 class="text-info"><span class="fa fa-graduation-cap">  </span>  أقسام كلية @Model.college.name</h3><hr />
+                            </div>
+                            <div class="row">
+
+                                @foreach (var subitem in it.Where(ii=>ii.collegeid==Model.collegeid && ii.id!=Model.id))
+                                {
+
+
+                                    <div class="col-sm-4 thumbnail " style="max-width:128px;max-height:120px;text-align:center">
+
+                                        <img class="img-circle " src="~/uploads/@subitem.photo" alt="" style=" width:70px; height:70px">
+
+                                        <p style="text-align:center">@Html.ActionLink(@Html.DisplayFor(modelItem => subitem.name).ToString(), "DetailsV", "Departments", new { id = subitem.id }, new { @class = "category-heading" })</p>
+
+                                    </div>
+
+
+                                }
+
+                            </div>
+                         
+                           
+
+                        </div>
+                    </div>
+                    <div class="thumbnail " style="border: ridge">
+                        <div class="aside-widget" style="margin:5%">
+                            <div class="section-title">
+                                <h3 class="text-info"><span class="fa fa-university">  </span>  كليات أخرى</h3><hr style="margin-bottom:-30px" />
+                            </div>
+
+
+                            <div class="tags-widget">
+                                <ul>
+                                    @foreach (var subitem in item)
+            {
+                                        <li style="margin-top:25px">@Html.ActionLink(@Html.DisplayFor(modelItem => subitem.name).ToString(), "DetailsV", "Colleges", new { id = subitem.id }, new { @class = "category-heading" })</li>
+
+
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /aside -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+</div>

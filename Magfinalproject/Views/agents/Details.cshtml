@@ -1,0 +1,52 @@
+﻿@model Magfinalproject.Models.agent
+
+@{
+    ViewBag.Title = "المعلومات / التفاصيل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:65px;padding-top:30px">التفاصيل</h2>
+
+<div>
+    
+    <hr />
+    <dl class="form-horizontal "style="padding-right:65px;padding-left:65px">
+  
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PointName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PointName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.regon)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.regon).ToString()))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p style="padding-right:65px">
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("الرجوع إلى القائمة", "Index")
+</p>

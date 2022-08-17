@@ -1,0 +1,125 @@
+﻿@model Magfinalproject.Models.Request_to_edit
+     
+@{
+    ViewBag.Title = "الطلبات / التفاصيل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+
+
+<h2 style="padding-right:65px;padding-top:30px">التفاصيل</h2>
+
+
+<hr />
+<dl class="form-horizontal text-info" style="padding-right:65px;padding-left:65px">
+
+
+
+    <dt>
+        @Html.DisplayNameFor(model => model.staff.name)
+    </dt>
+
+    <dd>
+        @Html.ActionLink(Model.staff.name, "Details", "staffs", new { id = Model.staff.id }, htmlAttributes: new { @class = "text-info" })
+
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.dgreeid)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.dgreeid)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.fullName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.fullName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.phoneNum)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.phoneNum)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.date)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.date)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.pic)
+    </dt>
+
+    <dd>
+        <img src="~/uploads/@Model.pic" class="thumbnail" style="width:48px; height:48px" />
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.picuni)
+    </dt>
+
+    <dd>
+        <img src="~/uploads/@Model.picuni" class="thumbnail" style="width:48px; height:48px" />
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.staff.user_name)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.staff.user_name)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.staff.password)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.staff.password)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.states)
+    </dt>
+
+    <dd>
+        @if (Model.states == true)
+            {
+            <label class="text-success">مقبول</label>
+
+
+        }
+        else
+        {
+            <label class="text-success">قيد المراجعة</label>
+        }
+    </dd>
+
+
+
+</dl>
+
+
+<p style="padding-right:65px">
+    @Html.ActionLink("تعديل", "Edit_confirm", new { id = Model.ID }) |
+    @Html.ActionLink("الرجوع إلى القائمة", "Index")
+</p>

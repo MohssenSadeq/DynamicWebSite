@@ -1,0 +1,51 @@
+﻿@model Magfinalproject.Models.college
+
+@{
+    ViewBag.Title = "الموظفين";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var item = Model.staffs;
+}
+<div class=" row page-header-row">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Home/Index">الرئيسية</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewBag.Title</li>
+    </ol>
+
+    <h2 class="mohsen">@Html.DisplayFor(model => model.name)</h2>
+
+
+
+    <hr />
+    <div class="form-horizontal">
+
+        <div class="row panel-body mohsen">
+            @foreach (var subItem in item)
+            {
+                <div class="col-xs-6 col-sm-4  col-md-3 col-lg-3 thumbnail" style="margin-right:10px;max-width:300px;max-height:281.28px;background-color:white ; border:ridge">
+                    <img src="~/uploads/@subItem.photo" class="img-rounded" style="width:100%;height:181px " />
+                    <div style="height:100px; padding-right:15px">
+                        @{ if (subItem.name.Length <= 30)
+                            {
+                                <h3>@Html.ActionLink(Html.DisplayFor(model => subItem.name).ToString(), "Details_for_client", "staffs", new { id = subItem.id }, new { @class = " text-info" })  </h3>
+
+                            }
+                            else
+                            {
+                                <h3>@Html.ActionLink(Html.DisplayFor(model => subItem.name).ToString().Substring(0, 30) + "...", "Detailspost", "cardinfoes", new { id = subItem.id }, new { @class = " text-info" })  </h3>
+
+                            }
+                        }
+
+                        <h6 style="color:slategray">  <span class="fa fa-clock-o"></span> @Html.DisplayFor(subIem => subItem.date) </h6>
+                    </div>
+                </div>
+                            }
+        </div>
+
+    </div>
+
+
+         </div>

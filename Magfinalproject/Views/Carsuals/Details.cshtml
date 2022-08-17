@@ -1,0 +1,124 @@
+﻿@*@model Magfinalproject.Models.Carsual
+
+@{
+    ViewBag.Title = "التفاصيل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Carsual</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.describtion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.describtion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pic)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+@model Magfinalproject.Models.Carsual
+
+    @{
+        ViewBag.Title = "الأخبار الرئيسية / التفاصيل";
+        Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+    }
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Home/magcontrol">لوحة التحكم</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewBag.Title</li>
+    </ol>
+    <h2 style="padding-right:65px;padding-top:30px">التفاصيل</h2>
+
+    <div>
+
+        <hr />
+        <dl class="form-horizontal" style="padding-right:65px;padding-left:65px">
+           
+
+            <dt>
+                @Html.DisplayNameFor(model => model.describtion)
+            </dt>
+
+            <dd>
+                @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.describtion).ToString()))
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.contenet)
+            </dt>
+
+            <dd>
+                @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.contenet).ToString()))
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.alt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.alt)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.pic)
+            </dt>
+
+            <dd>
+                <img src="~/uploads/@Model.pic" class="thumbnail" style="width:350px; height:150px" />
+
+            </dd>
+
+        </dl>
+    </div>
+    <p style="padding-right:65px">
+        @Html.ActionLink("تعديل", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("الرجوع إلى القائمة", "Index")
+    </p>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Magfinalproject.Models.agent>
+
+
+@{
+
+    ViewBag.Title = "نقاط الخدمة";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+<link href="~/vendor1/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home">الرئيسية</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title </li>
+</ol>
+
+    <div id="page-wrapper" class="mohsen">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table style="width:100%;direction:rtl;text-align:center" class="table table-secondary table-hover" id="dataTables-example">
+                            <thead>
+
+                                <tr>
+                                  
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PointName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.regon)
+                                    </th>
+                                
+                                 
+                                  
+                                </tr>
+                            <tbody>
+                               @foreach (var item in Model.OrderByDescending(dd => dd.date))
+                               {
+
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PointName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.regon)
+                                    </td>
+                              
+                                 
+                                </tr>
+                               }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    @section scripts{
+
+
+        <script src="~/vendor/jquery.dataTables.min.js"></script>
+        <script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+        <script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').DataTable({
+                    responsive: true
+                });
+            });
+        </script>
+    }

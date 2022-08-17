@@ -1,0 +1,42 @@
+﻿@font-face{
+    font-family:myFont;
+    src:url('font/Cairo-Regular.ttf')
+}
+
+@font-face{
+    font-family:myFont2;
+    src:url('font/Cairo-Regular.ttf')
+}
+/*body.navbar-default{
+      min-width: -webkit-fill-available;
+    font-family:myFont2;
+}*/
+div,label,text,textarea,html,col{
+    font-family:myFont2;
+}
+.mohsen{
+    padding-top:25px;
+    padding-right:25px;
+    padding-left:25px;
+   
+}
+
+
+
+.navbar-default .navbar-nav>li>a {
+    font-family:myFont;
+}
+
+
+
+
+.myfooter h3,ul,p{
+  
+    font-family:myFont2;
+   
+}
+  h1, h2, h3, h4, h5, h6,p{
+           font-family:myFont2;
+
+  }
+

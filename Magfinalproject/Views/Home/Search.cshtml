@@ -1,0 +1,184 @@
+﻿@using Magfinalproject.Models;
+@{
+    ViewBag.Title = "بحث";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+    string search = ViewBag.searchname;
+    var news = db.cardinfoes.Where(a => a.Category.classname.Contains(search)||a.title.Contains(search)||a.describtion.Contains(search) );
+    var college = db.colleges.Where(a => a.name.Contains(search) || a.about.Contains(search) );
+    var depart = db.departments.Where(a => a.name.Contains(search) || a.about.Contains(search)||a.college.name.Contains(search) );
+
+}
+<div class="jumbotron-fluid" style="background-color:black;padding:2em">
+    <h1 style="color:white">
+        <i class="fa fa-search"></i>   البحث 
+    </h1>
+</div>
+<style>
+    .jumbotron{
+           background-color:#dca62b
+    }
+</style>
+<div class=" row page-header-row">
+   
+    @if (search == "")
+    {
+        <h3 class="mohsen"> البحث عن : <i class="text-info">لا شيء !</i> </h3>
+
+    }
+    else
+    {
+        <h3 class="mohsen"> البحث عن : <i class="text-info">@search</i> </h3>
+
+    }
+
+    <hr />
+    @if (search != "" &&(news.Count() > 0 || college.Count() > 0)|| depart.Count() > 0)
+    {
+        if (news.Count() > 0 )
+        {
+            <h2 class="mohsen jumbotron"> الأخبار و الأحداث</h2>
+
+
+          
+            <div class="form-horizontal">
+
+                <div class="row panel-body mohsen">
+                    @foreach (var item in news.Where(itemm => itemm.Category.classname == "الأخبار").OrderByDescending(i => i.date).Take(6))
+                    {
+                        <div class="col-xs-12 col-sm-4  col-sm-4 col-lg-4 thumbnail " style="margin-right:10px;max-width:300px;height:450.28px;background-color:white ; border:ridge">
+                        <img src="~/uploads/@item.pic" class="img-rounded" style="height:181px" />
+                            <div style="height:100px; padding-right:15px">
+                                @{ if (item.title.Length <= 100)
+                                    {
+                                        <h5>@Html.ActionLink(Html.DisplayFor(model => item.title).ToString(), "Detailspost", "cardinfoes", new { id = item.ID }, new { @class = " text-info" })  </h5>
+
+                                    }
+                                    else
+                                    {
+                                        <h5>@Html.ActionLink(Html.DisplayFor(model => item.title).ToString().Substring(0, 100), "Detailspost", "cardinfoes", new { id = item.ID }, new { @class = " text-info" }) ...  </h5>
+
+                                    }
+                                    <hr />
+                                }
+                                @if (item.describtion.Length >= 130)
+                        {
+
+                                    <h4 style="color:slategray">
+                                        @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => item.describtion).ToString().Substring(0, 190) + " ..."))
+                                    </h4>
+
+
+                                }
+                                else
+                                {               <h4 style="color:slategray">
+                                    @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => item.describtion).ToString()))
+                                </h4>
+
+                                }
+                                <hr />
+                                <h6 style="color:slategray">  <span class="fa fa-clock-o"></span> @Html.DisplayFor(subIem => item.date) </h6>
+                            </div>
+                            </div>
+                          
+
+                             
+
+                                    }
+
+
+                </div>
+            </div>    <hr />
+                                    }
+                                    if (college.Count() > 0)
+                                    {
+                                        <h2 class="mohsen jumbotron">الوكلاء</h2>
+
+
+                                      
+                                        <div class="form-horizontal">
+
+                                            <div class="row panel-body mohsen">
+                                                @foreach (var item in college)
+                    {
+                                                    <div class="col-xs-12 col-sm-4  col-sm-4 col-lg-4 thumbnail " style="margin-right:10px;max-width:300px;height:400.28px;background-color:white ; border:ridge">
+                                                        <img src="~/uploads/@item.photo" class="img-rounded" style="width:200%;height:181px " />
+                                                        <div style="height:100px; padding-right:15px">
+                                                            <h5> @Html.ActionLink(Html.DisplayFor(model => item.name).ToString(), "DetailsV", "colleges", new { id = item.id }, new { @class = " text-info" })  </h5>
+                                                            @{ if (item.about.Length >= 300)
+                                                                {
+                                                                    <h5>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => item.about).ToString().Substring(0, 200) + " ...")) </h5>
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h5>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => item.about).ToString()))</h5>
+
+                                                                }
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                                }
+                                            </div>
+                                        </div>    <hr />
+                                                                }
+                                                                if (depart.Count() > 0)
+                                                                {
+                                                                    <h2 class="mohsen jumbotron">أقسام الوكلاء</h2>
+
+
+                                                               
+                                                                    <div class="form-horizontal">
+
+                                                                        <div class="row panel-body mohsen">
+                                                                            @foreach (var item in depart)
+                                                                            {
+                                                                                <div class="col-xs-12 col-sm-4  col-sm-4 col-lg-4 thumbnail " style="margin-right:10px;max-width:300px;height:400.28px;background-color:white ; border:ridge">
+                                                                                    <img src="~/uploads/@item.photo" class="img-rounded" style="width:200%;height:181px " />
+                                                                                    <div style="height:100px; padding-right:15px">
+                                                                                        <h5> @Html.ActionLink(Html.DisplayFor(model => item.college.name).ToString(), "DetailsV", "departments", new { id = item.id }, new { @class = " text-info" })  </h5>
+                                                                                        <h5> @Html.ActionLink(Html.DisplayFor(model => item.name).ToString(), "DetailsV", "departments", new { id = item.id }, new { @class = " text-info" })  </h5>
+                                                                                        @{ if (item.about.Length >= 300)
+                                                                                            {
+                                                                                                <h5>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => item.about).ToString().Substring(0, 200) + " ...")) </h5>
+
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                <h5>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => item.about).ToString()))</h5>
+
+                                                                                            }
+                                                                                        }
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                            }
+                                                                        </div>
+                                                                    </div>    <hr />
+                                                                                                }
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                            <h3 class="text-info"style="margin-right:30px">عفواً لا توجد نتائج, الرجاء إدخال ما تريد البحث عنه جيداً !</h3>
+                                                                                            }
+
+
+    </div>
+<style>
+    img {
+        display: block;
+        width: auto;
+        height: auto;
+    }
+
+    h3 {
+        font-size: 1.113em;
+        font-weight: 400;
+        color: black;
+    }
+
+    h6 {
+        margin-top: -5px !important;
+    }
+</style>

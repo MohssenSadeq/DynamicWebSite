@@ -1,0 +1,89 @@
+﻿@model Magfinalproject.Models.department
+
+@{
+    ViewBag.Title = "نقاط الخدمة / التفاصيل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2>التفاصيل</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.college.name)</h4>
+    <hr />
+    <dl class="form-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.college.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.college.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dgreeid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dgreeid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.photo)
+        </dt>
+
+        <dd>
+            <img src="~/uploads/@Model.photo" class="thumbnail" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.about)
+        </dt>
+
+        <dd>
+           @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.about).ToString()))
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.goals)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.goals).ToString()))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.digrees)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.digrees).ToString()))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("الرجوع الى القائمة", "Index")
+</p>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Magfinalproject.Models.Categorie>
+
+@{
+    ViewBag.Title = "Home Page";
+    var s = 0;
+    var m = 0;
+
+}
+
+    @if (Model != null)
+    {
+        <div class="row panel-body pad">
+
+            @foreach (var item in Model.Where(itemm  => itemm.classname.Contains("الأخبار")))
+            {            <div class="col-sm-9">
+
+        <div class=" pad well-sm"><h2>@Html.DisplayFor(modelItem => item.classname)</h2> <h5 style="padding-left:30px">@Html.ActionLink("عرض الكل", "allnews", "categories", new { id = item.ID }, new { @class = "text-info" })</h5></div>
+
+
+
+        @foreach (var subItem in item.cardinfo.OrderByDescending(or => or.date))
+        {
+            if (m <= 5)
+            {
+                m++;
+                <div class="col-sm-3 thumbnail" style="margin-left:20px; margin-bottom:30px;width:290.14px ;height:380.28px ">
+                    <img src="~/uploads/@subItem.pic" class="thumbnail" style="width:302.14px;height:181.28px " />
+                    <h2>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelItem => subItem.title).ToString()))</h2>
+                    <h6>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelItem => subItem.date).ToString()))</h6>
+
+                    @Html.ActionLink("التفاصيل", "Details", "cardinfoes", new { id = subItem.ID }, new { @class = "btn btn-primary" })
+
+                </div>
+            }
+
+        }
+
+    </div>
+
+            }
+
+
+            @foreach (var item in Model.Where(eve => eve.classname.Contains("الأحداث")))
+            {
+
+                <div class=" pad well-sm  "><h2>@Html.DisplayFor(modelItem => item.classname)</h2> <h5 style="padding-left:30px">@Html.ActionLink("عرض الكل", "allnews", "categories", new { id = item.ID }, new { @class = "text-info" })</h5></div>
+
+                <div class="col-sm-3 ">
+
+                    @foreach (var subItem in item.cardinfo.OrderByDescending(or => or.date))
+                    {
+                        if (s <= 3)
+                        {
+                            s++;
+                            <div class="thumbnail">
+
+                                <h2>@Html.ActionLink(subItem.title, "Details", "cardinfoes", new { id = subItem.ID }, new { @class = "text-info" })</h2>
+                                <h5>@Html.DisplayFor(subIem => subItem.describtion)</h5>
+                                <h6>@Html.DisplayFor(subIem => subItem.date)</h6>
+
+                            </div>
+
+                        }
+
+
+                    }
+                </div>
+            }
+
+
+
+            
+        </div>   }
+
+
+
+
+

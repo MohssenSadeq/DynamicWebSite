@@ -1,0 +1,111 @@
+﻿@model Magfinalproject.Models.Request_to_edit
+
+@{
+    ViewBag.Title = "الطلبات / الحذف";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:60px;padding-top:25px" class="text-danger">الحذف</h2>
+<h3 style="padding-right:60px;padding-top:25px" class="text-danger">هل أنت متأكد للقيام بعملية الحذف ؟</h3>
+<div>
+
+    <hr />
+    <dl class="form-horizontal " style="padding-right:5em;padding-top:1em">
+        <dt>
+            @Html.DisplayNameFor(model => model.staff.name)
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.staff.name, "Details", "staffs", new { id = Model.staff.id }, htmlAttributes: new { @class = "text-info" })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dgreeid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dgreeid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phoneNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phoneNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pic)
+        </dt>
+
+        <dd>
+            <img src="~/uploads/@Model.pic" class="thumbnail" style="width:48px; height:48px" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picuni)
+        </dt>
+
+        <dd>
+            <img src="~/uploads/@Model.picuni" class="thumbnail" style="width:48px; height:48px" />
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.states)
+        </dt>
+
+        <dd>
+            @if (Model.states == true)
+            {
+                <label class="text-success">مقبول</label>
+            }
+            else
+            {
+                <label class="text-success">قيد المراجعة</label>
+            }
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-right:5em;padding-bottom:1em">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("الرجوع الى القائمة", "Index")
+        </div>
+    }
+</div>

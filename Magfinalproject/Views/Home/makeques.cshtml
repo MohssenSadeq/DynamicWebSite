@@ -1,0 +1,180 @@
+﻿@model Magfinalproject.Models.ask
+@using Magfinalproject.Models;
+
+@{
+
+    ViewBag.Title = "الأسئلة / إنشاء";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+    var contact = db.contacts.Where(a => a.id != 0).FirstOrDefault();
+    var ask = db.asks.Where(a => a.answer != null).OrderByDescending(a=>a.priority).FirstOrDefault();
+
+}
+
+<div class="jumbotron-fluid" style="background-color:#002147;padding:5em">
+    <h1 style="color:white">
+       تواصل ودعم
+    </h1>
+</div>
+<style>
+    a.nav-link{
+        margin-bottom:5px;
+    }
+</style>
+@*<ul class="nav nav-tabs">
+      <li class="nav-item  ">
+        <a class="nav-link active" data-toggle="tab" href="#con_supp">التواصل والدعم</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#ans">مركز الأسئلة</a>
+    </li>
+  
+    <li class="nav-item ">
+        <a class="nav-link  " data-toggle="tab" href="#question">طرح سؤال</a>
+    </li>
+</ul>*@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#con_supp" role="tab" aria-controls="home" aria-expanded="true">التواصل والدعم</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#ans" role="tab" aria-controls="profile">مركز الأسئلة</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#question" role="tab" aria-controls="profile">طرح سؤال</a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+   
+
+    <div class="tab-pane fade active" id="con_supp">
+
+       
+
+        <div class="row text-info" style="padding-top:.5em;margin-right:1em">
+            <h3 class="text-info"style="text-align:center">
+                <i class="fa fa-info-circle "></i> يمكنك التواصل معنا عبر معلومات الأتصال التالية , أو يمكنك طرح سؤال على صفحة الأسئلة.<a class="text-light" style="font-size:26px;margin-right:0.3em;text-decoration:wavy">
+
+                </a>
+            </h3>
+        </div>
+
+        <style>
+            dl, dt {
+                font-weight: 700;
+                width: 15em;
+                margin-left: 1em;
+                line-height: 1.5;
+            }
+
+            dd {
+                direction: ltr;
+                text-align: right;
+                text-rendering: geometricPrecision;
+                width: inherit;
+            }
+
+            .col-md-12 {
+                text-align: -webkit-center;
+                padding-left: 10em;
+               
+                font-family: Cairo;
+               
+            }
+        </style>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <div style="direction:rtl">
+
+
+                    <dl class="form-horizontal " style="margin-right:65px">
+                          
+                     
+                            <dt>
+                                @Html.DisplayName("البريد الإلكتروني") :
+                            </dt>
+
+                            <dd class="text-info">
+                                @Html.LabelForModel(contact.contact_email)
+                            </dd>
+
+
+                            <dt>
+                                @Html.DisplayName("الهاتف الأرضي") :
+                            </dt>
+
+                            <dd class="text-info">
+                                @Html.Label(contact.telephone)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("الهاتف النقال") :
+                            </dt>
+
+                            <dd class="text-info">
+                                @Html.Label(contact.phone_num)   </dd>
+                       
+                       
+                    </dl>
+                </div>
+            </div>
+
+        </div>
+       
+    </div>
+    <div class="tab-pane fade" id="ans">
+     <h2 class="text-dark" style="margin:0.6em;margin-right:1em;text-align:right"><i class="fa fa-question-circle-o fa-lg"> </i>  أكثر الأسئلة المتداولة</h2>
+
+
+        <link href="~/vendor1/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <div class="row">
+    
+                @foreach (var item in db.asks.Where(a => a.answer != null).OrderByDescending(a => a.priority))
+                {      <div class="col-md-12"style="padding-left:0">
+
+                    <div class="card border-primary mb-3"style="text-align:center;margin-right:1em;margin-left:1em" >
+                        <div class="card-header text-info">@item.subject</div>
+                        <div class="card-body">
+                            <h4 class="card-title">@item.question</h4>
+                            <p class="card-text">@item.answer .</p>
+                        </div>
+                    </div>
+                </div>
+                }
+            
+        </div>
+    </div>
+    <div class="tab-pane fade" id="question">
+          @Html.Partial("_makeques");
+    </div>
+</div>
+
+
+@*<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.rawgit.com/JacobLett/bootstrap4-latest/504729ba/bootstrap-4-latest.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // executes when HTML-Document is loaded and DOM is ready
+
+
+        if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+        return $('a[data-toggle="tab"]').on('shown', function (e) {
+            return location.hash = $(e.target).attr('href').substr(1);
+        });
+
+
+        // document ready
+    });
+
+</script>*@
+
+
+
+
+
+
+
+
+ 

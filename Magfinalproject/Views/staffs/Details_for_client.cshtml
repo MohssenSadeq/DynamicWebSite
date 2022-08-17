@@ -1,0 +1,126 @@
+﻿@model Magfinalproject.Models.staff
+<link href="~/AdenCss/style.css" rel="stylesheet" />
+
+@{          
+    ViewBag.Title = Model.dgreesid + " : " + Model.name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class=" row page-header-row">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Home/Index">الرئيسية</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewBag.Title</li>
+    </ol>
+
+    <div class="section ">
+        <!-- container -->
+        <div class="container">
+
+            <div class="thumbnail " style="border: ridge">
+                <!-- row -->
+                <div class="row" style="margin-right:13px">
+                    <!-- Post content -->
+                    <div class="col-sm-4">
+
+                        <div class="section-row sticky-container">
+                            <div class="main-post">
+                                <!--نعمل السي كاه ايدتور-->
+
+
+                                <figure class="figure-img">
+                                    <img class="img-circle" src="~/uploads/@Model.photo" alt="" style="max-height:300px;max-width:300px">
+                                    <figcaption><!--نعمل العنوان--></figcaption>
+                                </figure>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-8">
+
+                        <div class="aside-widget " style="margin:5%">
+                            <div class="section-title">
+                                <h2 class="text-info"><span class="fa fa-users">  </span>  المعلومات الشخصية</h2><hr />
+                            </div>
+                            <div class="row">
+                                <dl>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.dgreesid)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.dgreesid)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.name)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.name)
+                                    </dd>
+                                </dl>
+
+                                <br />
+
+                            </div>
+                        </div>
+
+                        <!-- /aside -->
+                    </div>
+
+
+                </div>
+                <hr />
+
+                <!-- author -->
+                <div class="section-row">
+                    <div class="post-author">
+                        <div class="media">
+                            <div class="media-left">
+
+                            </div>
+                            <div class="media-middle" style="padding:25px">
+                                <div class="media-heading">
+                                    <h2><span class="fa fa-info-circle"></span>  حول</h2>
+                                </div>
+                                <p>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.about).ToString()))</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- /row -->
+                </div>
+                <!-- /container -->
+            </div>
+        </div>
+
+        <p style="padding-right:65px">
+            @Html.ActionLink("تعديل", "log", new { id = Model.id })
+        </p>
+    </div>
+</div>
+
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/toastr.min.js"></script>
+ 
+    <script>
+      
+        $(document).ready(function () {
+            @if(TempData.ContainsKey("Success"))
+     {
+       @:toastr.success("تم إرسال طلبك بنجاح.");
+
+            }
+        });
+
+    </script>
+
+}

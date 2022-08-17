@@ -1,0 +1,103 @@
+﻿@model Magfinalproject.Models.footer
+<link href="~/AdenCss/style.css" rel="stylesheet" />
+@using Magfinalproject.Models;
+@{
+    ViewBag.Title = Model.title+ " / التفاصيل";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+    var it = db.footers;
+}
+<div class="row panel-body pad   " style="margin-top:15PX">
+
+    <div class=" row page-header-row">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="~/Home/Index">الرئيسية</a>
+            </li>
+            <li class="breadcrumb-item active">@ViewBag.Title</li>
+        </ol>
+
+
+        <header id="header" style="direction:rtl">
+
+
+            <!-- Page Header -->
+            <div id="post-header" class="header-a">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10" style="padding-right:35px;margin-top:25px">
+
+                            <h1>@Html.DisplayFor(model => model.title)</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+        </header>
+        <div class="section ">
+            <!-- container -->
+            <div class="container-fluid">
+                <!-- row -->
+                <div class="row" style="margin-right:13px">
+                    <!-- Post content -->
+                    <div class="col-sm-12 col-sm-offset-4 col-md-8 col-lg-offset-4 col-lg-8 col-xl-8 col-lg-offset-4" style="width:max-content">
+                        <div class="thumbnail " style="border: ridge">
+                            <img class="thumbnail" src="~/uploads/@Model.pic" alt="" style=" align-content:center">
+                            <figcaption><!--نعمل العنوان--></figcaption>
+
+
+                            <!-- AddToAny BEGIN -->
+                            <div style="display:inline-flex;" class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                <a class="a2a_button_whatsapp"></a>
+                                <a class="a2a_button_facebook"></a>
+                                <a class="a2a_button_facebook_messenger"></a>
+                                <a class="a2a_button_telegram"></a>
+                                <a class="a2a_button_twitter"></a>
+                                <a class="a2a_button_pinterest"></a>
+                                <a class="a2a_button_email"></a>
+                                <a class="a2a_button_copy_link"></a>
+                                <a class="a2a_button_printfriendly"></a>
+                            </div>
+                            <script>
+                                var a2a_config = a2a_config || {};
+                                a2a_config.locale = "ar";
+                            </script>
+                            <script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <!-- author -->
+                            <div class="section-row" style="display:block">
+                                <div class="post-author">
+                                    <div class="media">
+
+                                        <div class="media-middle" style="padding:25px">
+                                            <div class="media-heading">
+                                                <h2><span class="fa fa-info-circle"></span>  حول</h2>
+                                            </div>
+                                            <p>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.describtion).ToString()))</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                    <!-- /aside -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+
+    </div>
+</div>
+<style>
+    img {
+        display: block;
+        width: auto;
+        height: auto;
+    }
+</style>

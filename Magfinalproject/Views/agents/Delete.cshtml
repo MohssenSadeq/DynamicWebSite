@@ -1,0 +1,58 @@
+﻿@model Magfinalproject.Models.agent 
+
+@{
+    ViewBag.Title = "المعلومات / الحذف";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+<h2 style="padding-right:60px;padding-top:25px" class="text-danger">الحذف</h2>
+<h3 style="padding-right:60px;padding-top:25px" class="text-danger">هل أنت متأكد للقيام بعملية الحذف ؟</h3>
+<div>
+
+    <hr />
+    <dl class="form-horizontal " style="padding-right:5em;padding-top:1em">
+     
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PointName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PointName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.regon)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.regon).ToString()))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+       
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-right:40px">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("الرجوع إلى القائمة", "Index")
+        </div>
+    }
+</div>

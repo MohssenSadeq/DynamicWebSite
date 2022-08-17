@@ -1,0 +1,19 @@
+﻿       
+
+ .div{
+            direction:rtl;
+        }   
+                  .p,h2{
+            direction:rtl;
+        }                 #mohsen{
+                            text-align:right;
+                          }
+        
+                      .form-control{
+            direction:rtl;
+        }
+                                      .form-group{
+            direction:rtl;
+               
+
+        }

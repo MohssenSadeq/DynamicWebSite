@@ -1,0 +1,111 @@
+﻿@model  Magfinalproject.Models.Categorie
+@using Magfinalproject.Models;
+
+
+@{
+
+    ViewBag.Title = "كل "+Model.classname;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var item = Model.cardinfo;
+    ApplicationDbContext db = new ApplicationDbContext();
+    var cardy = db.cardinfoes.Where(a=>a.CategoryID==Model.ID).FirstOrDefault();
+
+
+}
+
+<link href="~/vendor1/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home">الرئيسية</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title </li>
+</ol>
+
+    <div id="page-wrapper" class="mohsen">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table style="width:100%;direction:rtl;text-align:center" class="table table-secondary table-hover" id="dataTables-example">
+                            <thead>
+
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.classname)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => cardy.title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => cardy.describtion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => cardy.date)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => cardy.pic)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            <tbody>
+                                @foreach (var subitem in item.OrderByDescending(en => en.date))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => subitem.Category.classname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => subitem.title)
+                                        </td>
+                                        <td>
+                                            @if (subitem.describtion.Length >= 120)
+                                            {
+                                                @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => subitem.describtion).ToString().Substring(0, 120) + " ..."))
+
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelitem => subitem.describtion).ToString()))
+
+                                            }
+
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => subitem.date)
+                                        </td>
+                                        <td>
+                                            <img src="~/uploads/@subitem.pic" class="thumbnail" style="width:48px; height:48px" />
+                                        </td>
+                                        <td>
+                                            <a href="~/cardinfoes/Detailspost/@subitem.ID" title="تفاصيل" class="btn btn-default btn-sm text-info"><i class="fa fa-info-circle fa-lg" style="font-size:2em"></i></a> 
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    @section scripts{
+
+
+        <script src="~/vendor/jquery.dataTables.min.js"></script>
+        <script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+        <script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').DataTable({
+                    responsive: true
+                });
+            });
+        </script>
+    }

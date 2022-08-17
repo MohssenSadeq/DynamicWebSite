@@ -1,0 +1,109 @@
+﻿@model Magfinalproject.Models.staff
+
+@{
+    ViewBag.Title = "الموظفين / التفاصيل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+
+
+<h2 style="padding-right:65px;padding-top:30px">التفاصيل</h2>
+
+<div>
+
+    <hr />
+    <dl class="form-horizontal text-info" style="padding-right:65px;padding-left:65px">
+      
+
+        <dt>
+            @Html.DisplayName("الرقم التعريفي")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.photo)
+        </dt>
+
+        <dd>
+            <img src="~/uploads/@Model.photo" class="thumbnail" style="width:48px; height:48px" />
+        </dd>
+      
+        <dt>
+            @Html.DisplayNameFor(model => model.dgreesid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dgreesid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name_en)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name_en)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.about)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.about).ToString()))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+    </dl>
+</div>
+    <br />
+<br />
+    <p style="padding-right:65px">
+        @Html.ActionLink("تعديل", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("الرجوع إلى القائمة", "Index")
+    </p>

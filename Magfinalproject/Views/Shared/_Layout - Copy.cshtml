@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html >
+<html  >
+<head>
+
+    @using Magfinalproject.Models;
+
+    @{
+        ViewBag.Title = "الرئيسية";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ApplicationDbContext db = new ApplicationDbContext();
+        var footer = db.footers;
+
+    }
+    <link href="~/AdenCss/bootstrap.rtl.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scaleable=no">
+    <title>@ViewBag.Title - University of Aden </title>
+
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+    <link href="~/vendor/sb-admin-2.css" rel="stylesheet" />
+
+    @*<link href="~/AdenCss/css__BJ6.css" rel="stylesheet" />*@
+    @*<link href="~/AdenCss/css__U1f.css" rel="stylesheet" />
+    <link href="~/AdenCss/css__2D.css" rel="stylesheet" />*@
+    @*<link href="~/AdenCss/css.css" rel="stylesheet" />*@
+    <link href="~/AdenCss/css__qX9Tr.css" rel="stylesheet" />
+    <link href="~/AdenCss/newstyle.css" rel="stylesheet" />
+    <link href="~/AdenCss/css__hGYB.css" rel="stylesheet" />
+    <link href="~/AdenCss/css__pZS.css" rel="stylesheet" />
+    <link href="~/Content/font.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    
+
+    <link href="~/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="~/vendor/bootstrap-social/bootstrap-social.css" rel="stylesheet" />
+    <link href="~/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet" />
+    <link href="~/vendor/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/vendor/animate.css" rel="stylesheet" />
+  <style> a, button{ display: inline-block; text-decoration: none; color: inherit; line-height: 1.3;
+    -webkit-transition: all .25s ease-in-out; } </style>  
+</head>
+
+<body class="front not-logged-in no-sidebars page-node page-node- page-node-1110 node-type-oxweb-homepage domain-oxweb no-sidebar-first vid-1835756 jquery-once-1-processed root-menus desktop" style="background-color:transparent;">
+<!-- Google Tag Manager -->
+<header class="page-level page-header">
+<div class="wrapper">
+<div id="page-header-row" class="row page-header-row">
+
+<figure class="logo ">
+<a href="~/Home" title="Home" id="site-name-square"><img src="~/uploads/LOGO.png" /></a>
+<figcaption>
+<h5 style="color:white;text-align:center">جـــامعة عـــدن</h5>
+</figcaption>
+</figure>
+<div class="menu-wrapper">
+<div id="site-header-top" class="site-header-top" style="">
+<div id="block-block-23" class="block block-block oxweb-academic-divisions block-block-23 ">
+<!-- Main menu link -->
+
+</div>
+<div id="block-block-26" class="block block-block oxweb-college-websites block-block-26 " >
+<a class="main-menu-item" href="#">
+<!-- Main menu title -->
+   
+<h2 >الكليات</h2>
+</a>
+<div class="flyout-menu colleges " style="display: none;">
+<div class="section">
+<div class="section-with-btns">
+
+<div class="section-buttons">
+
+</div>
+</div>
+
+<ul class="col1">
+<li>
+ا
+<ul>
+    <li><a href="#">كلية الإقتصاد</a></li>
+    <li><a href="#">كلية الآداب</a></li>
+</ul>
+</li>
+
+<li>
+ت
+<ul>
+    <li><a href="#">كلية التربية - ردفان</a></li>
+    <li><a href="#">كلية التربية - زنجبار</a></li>
+    <li><a href="#">كلية التربية - شبوة</a></li>
+    <li><a href="#">كلية التربية - صبر</a></li>
+    <li><a href="#">كلية التربية - الضالع</a></li>
+    <li><a href="#">كلية التربية - طور الباحة</a></li>
+    <li><a href="#">كلية التربية - لودر</a></li>
+</ul>
+</li>
+</ul>
+<ul class="col2">
+<li>
+ح
+<ul>
+    <li><a href="#">كلية الحاسب - الآلي</a></li>
+    <li><a href="#">كلية الحقوق</a></li>
+</ul>
+</li>
+<li>
+ص
+<ul>
+    <li><a href="#">كلية الصيدلة</a></li>
+</ul>
+</li>
+<li>
+ط
+<ul>
+    <li><a href="#">كلية طب الأسنان</a></li>
+    <li><a href="#">كلية الطب والعلوم الصحية</a></li>
+</ul>
+</li>
+</ul>
+<ul class="col3">
+<li>
+ع
+<ul>
+    <li><a href="#">كلية العلوم</a></li>
+    <li><a href="#">كلية العلوم الأجتماعية والتطبيقية</a></li>
+    <li><a href="#">كلية العلوم السياسية</a></li>
+    <li><a href="#">كلية العلوم الإدارية</a></li>
+</ul>
+</li>
+<li>
+ل
+<ul>
+    <li><a href="#">كلية اللغات</a></li>
+</ul>
+</li>
+<li>
+ن
+<ul>
+    <li><a href="#">كلية ناصر للعلوم الزراعية</a></li>
+    <li><a href="#">كلية النفط والمعادن</a></li>
+</ul>
+</li>
+<li>
+ه
+<ul>
+    <li><a href="#">كلية الهندسة</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="site-header-bottom" class="site-header-bottom" style="display: block;">
+<div id="block-oxweb-google-search-search-form" class="block block-oxweb-google-search block-oxweb-search block-oxweb-google-search-search-form">
+
+<form action="#" method="post" accept-charset="UTF-8" role="form">
+<div class="form-item form-type-textfield form-item-query">
+
+<input title="ادخل المصطلح الذي تريد البحث عنه." placeholder="بحث..." type="text" id="edit-query" name="query" value="" size="30" maxlength="128" class="form-text" style="">
+</div>
+</form>
+</div>
+<nav id="block-menu-block-2" class="block block-menu-block oxweb-primary-menu-block homepage-role-base-menu block-menu-block-2 " role="navigation">
+
+<ul>
+<li class="first leaf has-children menu-mlid-3382 odd"><a href="#" title="Staff Gateway">الموظفين</a></li>
+<li><a href="#">الطلاب</a></li>
+<li><a href="#">الخريجين</a></li>
+<li><a href="#">مجتمع محلي</a></li>
+</ul>
+
+</nav>
+<nav id="block-menu-block-4" class="block block-menu-block oxweb-secondary-menu-block oxweb-secondary-menu-block-noh2 homepage-oxweb-secondary-menu block-menu-block-4 " role="navigation">
+<ul>
+<li class="expanded"><a href="#"> القبول & التسجيل</a><ul>
+<li class="first leaf has-children menu-mlid-2511"><a href="#">مرحلة البكالوريوس</a></li>
+<li class="leaf has-children menu-mlid-2878"><a href="#">مرحلة بعد البكالوريوس</a></li>
+<li class="last leaf has-children menu-mlid-1215"><a href="#">اكمال التعليم</a></li>
+</ul>
+</li>
+<li class="expanded"><a href="#">البحوث</a>
+<ul>
+<li><a href="#">قسم1</a></li>
+<li><a href="#">قسم2</a></li>
+<li><a href="#">قسم3</a></li>
+<li><a href="#">قسم4</a></li>
+<li><a href="#">قسم5</a></li>
+</ul>
+
+</li>
+<li class="expanded">
+<a href="#" title="">أخبار & أحداث</a><ul>
+<li><a href="#">أحداث</a></li>
+<li><a href="#">أحداث</a></li>
+<li><a href="#">أحداث</a></li>
+<li><a href="#">أحداث</a></li>
+</ul>
+<li class="expanded"style="border-left:0px">
+<a href="#">حول</a>
+<ul>
+<li><a href="#">الجامعة</a></li>
+<li><a href="#">الجامعة</a></li>
+<li><a href="#">الجامعة</a></li>
+<li><a href="#">الجامعة</a></li>
+<li><a href="#">الجامعة</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+<div class="container-fluid" style="background-color:#EEEEEE">
+@*@if (Model != null)
+{
+foreach ( var moh in Model.list_info)
+{<div class="btn-group btn-group-df">
+<button value="@Html.DisplayFor(modelItem =>moh.maintitle)" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+<span class="caret"></span>
+</button>
+@foreach (var subitem in moh.subinformation)
+{ <ul class="dropdown-menu">
+<li>
+@Html.ActionLink(subitem.subtitle, "Details", "cardinfoes", new { id = subitem.ID }, new { @class = "text-info" })
+</li>
+</ul>}
+</div>      }
+}*@
+
+@RenderBody()
+</div>
+<footer id="page-footer" class="page-level page-footer" style="direction:rtl">
+<div class="wrapper">
+<div class="row">
+<div id="block-block-15" class="block block-block social-links block-block-15 ">
+
+<h2>تواصل معنا</h2>
+    <div style="margin-bottom:1em">
+        <a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+        <a class="btn btn-social-icon btn-flickr"><i class="fa fa-flickr"></i></a>
+        <a class="btn btn-social-icon btn-github"><i class="fa fa-github"></i></a>
+        <a class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i></a>
+        <a class="btn btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
+        <a class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+        <a class="btn btn-social-icon btn-pinterest"><i class="fa fa-pinterest"></i></a>
+        <a class="btn btn-social-icon btn-tumblr"><i class="fa fa-tumblr"></i></a>
+        <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+    </div>
+</div>
+<div id="block-block-14" class="block block-block site-map block-block-14 ">
+<div class="sitemap-item">
+<h2>معلومات حول</h2>
+<ul>
+
+    @foreach (var subItem in footer.Where(itemm => itemm.mainfoot.ToString().Contains("معلومات_حول")).OrderBy(or => or.title))
+    {
+
+        <li>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "footers", new { id = subItem.ID }, new { @class = " text-link" })  </li>
+
+    }
+    
+@*<li><a href="#">جامعة عدن</a></li>
+<li><a href="#">الخطه</a></li>
+<li><a href="#">ابحاث الجامعة</a></li>
+
+<li><a href="#">المكتبات</a></li>
+
+<li><a href="#">أيام الدوام</a></li>
+<li><a href="#">معرض الجامعة</a></li>
+
+<li><a href="#">خصوصية لبيانات</a></li>
+<li><a href="#">الرياضة في الجامعة</a></li>*@
+
+</ul>
+</div>
+
+<div class="sitemap-item">
+<h2>معلومات لأجل</h2><ul>
+@foreach (var subItem in footer.Where(ss => ss.mainfoot.ToString().Contains("معلومات_لأجل")).OrderBy(or => or.title))
+{
+
+    <li>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "footers", new { id = subItem.ID }, new { @class = " text-info" })  </li>
+
+}
+
+@*<li><a href="#">طلاب البكالوريوس</a></li>
+<li><a href="#">طلاب الدراسات العلياء</a></li>
+<li><a href="#">متابعة التعليم</a></li>
+<li><a href="#">موظفين الجامعة</a></li>
+<li><a href="#">طلاب الجامعة</a></li>
+<li><a href="#">الخريجين</a></li>
+<li><a href="#">المدرسين</a></li>*@
+</ul>
+</div>
+
+<div class="sitemap-item">
+<h2>روابط سريعة</h2>
+
+<ul>
+
+@foreach (var subItem in footer.Where(ss=>ss.mainfoot.ToString().Contains("روابط_سريعة")).OrderBy(or => or.title))
+{
+
+        <li>@Html.ActionLink(Html.DisplayFor(model => subItem.title).ToString(), "Detailspost", "footers", new { id = subItem.ID }, new { @class = " text-info" })  </li>
+
+    }
+    @*}
+<li><a href="#">البحث عن أتصال</a></li>
+
+<li><a href="#">أوقات الفصول</a></li>
+<li><a href="#">الخريطة</a></li>
+
+<li><a href="#">مواقع التواصل الأجتماعي</a></li>
+<li><a href="#">صور الجامعة</a></li>*@
+</ul>
+</div>
+</div>
+
+<div id="block-block-16" class="block block-block legals-questions block-block-16 ">
+
+<ul>
+<li class="copyright">
+<p>&copy; @DateTime.Now.Year - جامعة عدن</p>
+</li>
+<li>
+<a href="#">اتصل بنا</a>
+</li>
+<li>
+<a href="#">حول هذا الموقع</a>
+</li>
+<li>
+<a href="#">سياسة الخصوصية</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+         
+
+   
+</body>
+</html>
+
+@*<script src="~/AdenScript/insight.min.js"></script>
+<script src="~/AdenScript/gtm.js"></script>*@
+@*<script src="~/AdenScript/analytics.js"></script>*@
+@*<script src="~/AdenScript/fbevents.js"></script>*@
+<script src="~/AdenScript/js__q4Z.js"></script>
+@*<script src="~/AdenScript/js__T73.js"></script>*@
+@*<script src="~/AdenScript/js__9o6.js"></script>*@
+@*<script src="~/AdenScript/js__-StjH.js"></script>*@
+@*<script src="~/AdenScript/script.js"></script>*@
+@*<script src="~/AdenScript/js__5Ak.js"></script>*@
+@*<script src="~/AdenScript/js__s.js"></script>*@
+<script src="~/AdenScript/js__NA.js"></script>
+@*<script src="~/AdenScript/ad_status.js"></script>
+<script src="~/AdenScript/base.js"></script>*@
+<script src="~/vendor/jquery.js"></script>
+
+@*<script src="~/AdenScript/bootstrap.js"></script>*@
+<script src="~/vendor/jquery.dataTables.min.js"></script>
+
+<script src="~/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="~/vendor/datatables-responsive/dataTables.responsive.js"></script>
+@*<script src="~/vendor/wow.min.js"></script>*@
+@*<script>new WOW().init();</script>*@
+<script src="~/vendor/jquery.nicescroll.min.js"></script>
+<script>$("html").niceScroll();</script>

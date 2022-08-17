@@ -1,0 +1,70 @@
+﻿@model Magfinalproject.Models.Categorie
+
+@{
+    ViewBag.Title = "التصنيفات / التعديل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+
+
+<style>
+    .row, form {
+        width: 100%;
+    }
+</style>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+
+<h2>التعديل</h2>
+<h4 class="text-warning"><i class="fa fa-info-circle"></i> هذا التعديل سيؤثر على جميع المعلومات المتصلة به في جدول البيانات, كن حذراً !</h4>
+<hr />
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.classname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.classname, new List<SelectListItem>
+                        {
+                            new SelectListItem{ Text=" الأحداث", Value = "الأحداث" },
+                            new SelectListItem{ Text="الأخبار", Value = "الأخبار" },
+                            new SelectListItem{ Text=" الطلاب", Value = "الطلاب" },
+                            new SelectListItem{ Text="مجتمع محلي", Value = "مجتمع محلي" },
+                            new SelectListItem{ Text=" الخريجين", Value = "الخريجين" },
+                            new SelectListItem{ Text="عن الشركة", Value = "عن الشركة" },
+                            new SelectListItem{ Text=" القبول و التسجيل", Value = "القبول و التسجيل" },
+                            new SelectListItem{ Text="الشئون الأكاديمية", Value = "الشئون الأكاديمية" },
+                            new SelectListItem{ Text=" الدراسات العلياء و البحث العلمي", Value = "الدراسات العلياء و البحث العلمي" },
+                         }, htmlAttributes: new { @class = "form-control" })   
+
+             
+                       @Html.ValidationMessageFor(model => model.classname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+            <div class="form-group">
+                                <div class=" col-sm-10">
+                    <input type="submit" value="حفظ" class="btn btn-primary" />
+                </div>
+            </div>
+
+    }
+</div>
+
+    <hr />
+    <p >
+        @Html.ActionLink("الرجوع إلى القائمة", "Index")
+    </p>
+<script src="~/Scripts/jquery.min.js"></script>

@@ -1,0 +1,158 @@
+﻿@model Magfinalproject.Models.staff
+
+@{
+    ViewBag.Title = "الموظفين / التعديل";
+    Layout = "~/Views/Shared/_Layoutmagcontrol.cshtml";
+}
+
+<style>
+    .row, form {
+        width: 100%;
+    }
+</style>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="~/Home/magcontrol">لوحة التحكم</a>
+    </li>
+    <li class="breadcrumb-item active">@ViewBag.Title</li>
+</ol>
+
+<h2>التعديل</h2>
+<hr />
+<div class="row">
+    @using (Html.BeginForm("Edit", "staffs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dgreesid, "إسم الوظيفة", htmlAttributes: new { @class = "control-label col-sm-2" })
+            <div class="col-sm-10">
+                @Html.EnumDropDownListFor(model => model.dgreesid, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.dgreesid, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.name_en, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.name_en, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name_en, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.photo, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    <img src="~/uploads/@Model.photo" class="thumbnail" style="width:96px; height:96px" />
+                    <input type="file" name="uploads" class="form-control" id="cardimg" />
+                    @Html.ValidationMessageFor(model => model.photo, "", new { @class = "text-danger" })
+                    <div class="alert alert-danger" id="error-div" style="display:none">
+                        <span id="view-error"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.about, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10" style="padding-left:100px">
+                    @Html.TextAreaFor(model => model.about, new { htmlAttributes = new { @class = "form-control", @id = "about" } })
+                    @Html.ValidationMessageFor(model => model.about, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.phone_num, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.phone_num, new { htmlAttributes = new { @placeholder = "(+967) 770 893 621", @class = "form-control phone" } })
+
+                    @Html.ValidationMessageFor(model => model.phone_num, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user_name, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.user_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.user_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                                <div class=" col-sm-10">
+                    <input type="submit" value="تعديل" class="btn btn-primary" id="save" />
+                </div>
+            </div>
+
+    }
+</div>     <hr />
+    <p >
+        @Html.ActionLink("الرجوع إلى القائمة", "Index")
+    </p>
+
+    <script src="~/Scripts/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+
+            $("#save").click(function () {
+                //if ($("#cardimg").val() == "") {
+                //    $("#error-div").fadeIn();
+                //    $("#view-error").append("الرجآء أختيار صورة");
+                //    return false;
+                //}
+                if ($("#cardimg").val() != "") {
+                    var filename = document.getElementById("cardimg").value;
+                    var extionsionimg = filename.substr(filename.lastIndexOf('.') + 1)
+                    var validextention = ['jpg', 'png', 'jpeg', 'gif', 'JPG'];
+                    if ($.inArray(extionsionimg, validextention) == -1) {
+                        $("#error-div").fadeIn();
+                        $("#view-error").append(" الرجآء أختيار صورة بإمتداد صحيح");
+                        return false;
+                    }
+                    var filesize = document.getElementById("cardimg").files[0].size / 1024 / 1024;
+                    if (filesize > 2) {
+                        $("#error-div").fadeIn();
+                        $("#view-error").append("الرجآء أختيار صورة حجمها أقل من 2 م.ب");
+                        return false;
+                    }
+                }
+            })
+        }
+
+        );
+    </script>
+
+    <script>
+        CKEDITOR.replace("about");
+    </script>
